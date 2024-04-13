@@ -1,12 +1,4 @@
 definitions:
-  checkversion.CheckVersionRequest:
-    properties:
-      base_url:
-        description: bank url < epg_server_IP_address>
-        type: string
-    required:
-    - base_url
-    type: object
   checkversion.EPGVersionsResponse:
     properties:
       error1:
@@ -27,18 +19,9 @@ info:
   contact: {}
 paths:
   /check-version:
-    post:
-      consumes:
-      - application/json
+    get:
       description: This API endpoint checks the versions of E-commerce Payment Gateway
-        data for two URLs constructed from a provided base URL.
-      parameters:
-      - description: Request containing the base URL
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/checkversion.CheckVersionRequest'
+        data for two URLs constructed from a provided base URL in *ENV*.
       produces:
       - application/json
       responses:

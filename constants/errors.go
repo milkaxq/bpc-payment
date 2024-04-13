@@ -12,3 +12,29 @@ const (
 type HttpError struct {
 	Error string `json:"error"`
 }
+
+// Constants for error codes
+const (
+	ErrorCodeNoError              = "0"
+	ErrorCodeProcessed            = "1"
+	ErrorCodeNotPaid              = "2"
+	ErrorCodeUnknownCurrency      = "3"
+	ErrorCodeMissingParameter     = "4"
+	ErrorCodeIncorrectValue       = "5"
+	ErrorCodeAccessDenied         = "6"
+	ErrorCodeSystemError          = "7"
+	ErrorCodeInvalidPaymentMethod = "14"
+)
+
+// Map of error codes to corresponding error messages
+var ErrorCodeToMessage = map[string]string{
+	ErrorCodeNoError:              "",
+	ErrorCodeProcessed:            "Order already processed or incorrect childId.",
+	ErrorCodeNotPaid:              "Order registered but not paid.",
+	ErrorCodeUnknownCurrency:      "Unknown currency.",
+	ErrorCodeMissingParameter:     "Missing required parameter(s):",
+	ErrorCodeIncorrectValue:       "Incorrect value for a request parameter or language code.",
+	ErrorCodeAccessDenied:         "Access denied or other issues:",
+	ErrorCodeSystemError:          "System error. Please try again later.",
+	ErrorCodeInvalidPaymentMethod: "Invalid payment method provided.",
+}

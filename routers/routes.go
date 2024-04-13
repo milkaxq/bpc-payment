@@ -17,7 +17,7 @@ func InitRoutes() {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := r.Group("/api/v1")
 	{
-		v1.POST("/check-version", checkversion.CheckVersion)
+		v1.GET("/check-version", checkversion.CheckVersion)
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()

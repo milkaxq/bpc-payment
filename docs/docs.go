@@ -16,11 +16,8 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/check-version": {
-            "post": {
-                "description": "This API endpoint checks the versions of E-commerce Payment Gateway data for two URLs constructed from a provided base URL.",
-                "consumes": [
-                    "application/json"
-                ],
+            "get": {
+                "description": "This API endpoint checks the versions of E-commerce Payment Gateway data for two URLs constructed from a provided base URL in *ENV*.",
                 "produces": [
                     "application/json"
                 ],
@@ -28,17 +25,6 @@ const docTemplate = `{
                     "epg"
                 ],
                 "summary": "Check EPG Versions",
-                "parameters": [
-                    {
-                        "description": "Request containing the base URL",
-                        "name": "request",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/checkversion.CheckVersionRequest"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "success response containing versions for both URLs",
@@ -63,18 +49,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "checkversion.CheckVersionRequest": {
-            "type": "object",
-            "required": [
-                "base_url"
-            ],
-            "properties": {
-                "base_url": {
-                    "description": "bank url \u003c epg_server_IP_address\u003e",
-                    "type": "string"
-                }
-            }
-        },
         "checkversion.EPGVersionsResponse": {
             "type": "object",
             "properties": {
