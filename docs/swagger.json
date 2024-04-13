@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/check-version": {
+            "post": {
+                "description": "This API endpoint checks the versions of E-commerce Payment Gateway data for two URLs constructed from a provided base URL.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "epg"
+                ],
+                "summary": "Check EPG Versions",
+                "parameters": [
+                    {
+                        "description": "Request containing the base URL",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/checkversion.CheckVersionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success response containing versions for both URLs",
+                        "schema": {
+                            "$ref": "#/definitions/checkversion.EPGVersionsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "on invalid request body",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "on check version function error",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "checkversion.CheckVersionRequest": {
+            "type": "object",
+            "properties": {
+                "base_url": {
+                    "description": "bank url \u003c epg_server_IP_address\u003e",
+                    "type": "string"
+                }
+            }
+        },
+        "checkversion.EPGVersionsResponse": {
+            "type": "object",
+            "properties": {
+                "error1": {
+                    "type": "string"
+                },
+                "error2": {
+                    "type": "string"
+                },
+                "version1": {
+                    "type": "string"
+                },
+                "version2": {
+                    "type": "string"
+                }
+            }
+        },
+        "constants.HttpError": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -8,3 +8,7 @@ const (
 	ErrReadingResponseBdoy  = "error reading response body: "
 	ErrCheckingEPGVersion   = "error checking EPG version: "
 )
+
+type HttpError struct {
+	Error string `json:"error"`
+}
