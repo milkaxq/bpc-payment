@@ -15,7 +15,7 @@ import (
 // @Param request body CheckVersionRequest true "Request containing the base URL"
 // @Success 200 {object} EPGVersionsResponse  "success response containing versions for both URLs"
 // @Failure 400 {object} constants.HttpError "on invalid request body"
-// @Failure 500 {object} constants.HttpError "on check version function error"
+// @Failure 500 {object} EPGVersionsResponse "on check version function error"
 // @Router /check-version [post]
 func CheckVersion(c *gin.Context) {
 	var request CheckVersionRequest
@@ -24,9 +24,9 @@ func CheckVersion(c *gin.Context) {
 		return
 	}
 
-	versions, err := checkEPGVersions(request.BaseURL)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+	versions := checkEPGVersions(request.BaseURL)
+	if versions.Error1 != "" && versions.Error2 != "" {
+		c.JSON(http.StatusInternalServerError, versions)
 		return
 	}
 

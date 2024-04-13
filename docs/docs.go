@@ -55,7 +55,7 @@ const docTemplate = `{
                     "500": {
                         "description": "on check version function error",
                         "schema": {
-                            "$ref": "#/definitions/constants.HttpError"
+                            "$ref": "#/definitions/checkversion.EPGVersionsResponse"
                         }
                     }
                 }
