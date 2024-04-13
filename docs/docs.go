@@ -65,6 +65,9 @@ const docTemplate = `{
     "definitions": {
         "checkversion.CheckVersionRequest": {
             "type": "object",
+            "required": [
+                "base_url"
+            ],
             "properties": {
                 "base_url": {
                     "description": "bank url \u003c epg_server_IP_address\u003e",

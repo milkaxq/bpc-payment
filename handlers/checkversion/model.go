@@ -2,7 +2,7 @@ package checkversion
 
 type CheckVersionRequest struct {
 	// bank url < epg_server_IP_address>
-	BaseURL string `json:"base_url"`
+	BaseURL string `json:"base_url" validate:"required" binding:"required"`
 }
 
 type EPGVersionsResponse struct {

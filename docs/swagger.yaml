@@ -4,6 +4,8 @@ definitions:
       base_url:
         description: bank url < epg_server_IP_address>
         type: string
+    required:
+    - base_url
     type: object
   checkversion.EPGVersionsResponse:
     properties:
