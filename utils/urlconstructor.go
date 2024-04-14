@@ -19,8 +19,14 @@ func StructToURLParams(data interface{}) string {
 		field := t.Field(i)
 		value := v.Field(i).Interface()
 
-		// Get the JSON tag of the field
-		tag := extractJSONTag(field)
+		// Get the JSON tag of the field (or use field name if no JSON tag)
+		tag := field.Tag.Get("json")
+		if tag == "" {
+			tag = field.Name
+		} else {
+			// Strip ",omitempty" from the JSON tag
+			tag = strings.Split(tag, ",")[0]
+		}
 
 		// Check if the field value is non-empty
 		if !isEmpty(value) {
@@ -32,17 +38,6 @@ func StructToURLParams(data interface{}) string {
 	// Join all query parameters with "&" to form the query string
 	queryString := strings.Join(queryParams, "&")
 	return queryString
-}
-
-// extractJSONTag extracts the JSON tag name without any options (e.g., omitempty)
-func extractJSONTag(field reflect.StructField) string {
-	tag := field.Tag.Get("json")
-	if tag == "" {
-		return field.Name
-	}
-
-	// Split the tag by comma to handle options like omitempty
-	return strings.Split(tag, ",")[0]
 }
 
 // isEmpty checks if a value is nil or an empty string
