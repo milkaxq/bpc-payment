@@ -14,7 +14,7 @@ type OrderRegistrationRequest struct {
 		Number (identifier) of the order in the merchant’s online store system.
 		It is unique for every store in the system and is generated on the order registration.
 	*/
-	OrderNumber string `json:"orderNumber" minLength:"1" maxLength:"32" binding:"required"`
+	OrderNumber string `json:"orderNumber" minLength:"1" maxLength:"32"`
 	//Order amount in the minor denomination (for example, cents).
 	Amount int64 `json:"amount" minLength:"1" maxLength:"19" binding:"required"`
 	// Payment currency code in the ISO 4217 format
