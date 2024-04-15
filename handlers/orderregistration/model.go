@@ -147,7 +147,6 @@ type OrderRegistrationRequest struct {
 		Parameters of the 3-D Secure 2 protocol
 		authentication. The threeDS2Params parameter is
 		a JSON-based structure. See 3-D Secure 2
-		498
 		parameter list
 		for details.
 		This parameter is used for 3-D Secure 2 authentication (for 3-D Secure 1 it is unnecessary).
@@ -178,10 +177,7 @@ type OrderRegistrationResponse struct {
 
 // getErrorString constructs a user-friendly error message based on the ErrorCode and ErrorMessage.
 func (c OrderRegistrationResponse) getErrorString() string {
-	errorMessage := ""
-	if errorMessage, ok := constants.ErrorCodeToMessage[c.ErrorCode]; ok {
-		errorMessage = errorMessage + "\n"
-	}
+	errorMessage := constants.ErrorCodeToMessage[c.ErrorCode]
 
 	switch c.ErrorCode {
 	case constants.ErrorCodeNoError:
