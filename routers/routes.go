@@ -5,6 +5,7 @@ import (
 	docs "github.com/milkaxq/bpcpayment/docs"
 	"github.com/milkaxq/bpcpayment/handlers/checkversion"
 	"github.com/milkaxq/bpcpayment/handlers/orderregistration"
+	"github.com/milkaxq/bpcpayment/handlers/submitcard"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -20,6 +21,7 @@ func InitRoutes() {
 	{
 		v1.GET("/check-version", checkversion.CheckVersion)
 		v1.POST("/register-order", orderregistration.OrderRegistration)
+		v1.POST("/submit-card", submitcard.SubmitCard)
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()
