@@ -5,22 +5,22 @@ import "github.com/milkaxq/bpcpayment/constants"
 type OrderRegistrationRequest struct {
 	// User credentials
 	// Login of the API user on whose behalf requests are processed for a particular merchant.
-	Username string `json:"userName" minLength:"1" maxLength:"30"`
+	Username string `json:"userName" minLength:"1" maxLength:"30" binding:"required"`
 	// User’s password.
-	Password string `json:"password" minLength:"1" maxLength:"30"`
+	Password string `json:"password" minLength:"1" maxLength:"30" binding:"required"`
 
 	// Order details
 	/*
 		Number (identifier) of the order in the merchant’s online store system.
 		It is unique for every store in the system and is generated on the order registration.
 	*/
-	OrderNumber string `json:"orderNumber" minLength:"1" maxLength:"32"`
+	OrderNumber string `json:"orderNumber" minLength:"1" maxLength:"32" binding:"required"`
 	//Order amount in the minor denomination (for example, cents).
-	Amount int64 `json:"amount" minLength:"1" maxLength:"19"`
+	Amount int64 `json:"amount" minLength:"1" maxLength:"19" binding:"required"`
 	// Payment currency code in the ISO 4217 format
-	Currency string `json:"currency" minLength:"3" maxLength:"3"`
+	Currency string `json:"currency" minLength:"3" maxLength:"3" binding:"required"`
 	// URL to which the customer is redirected after a successful payment.
-	ReturnUrl string `json:"returnUrl" minLength:"1" maxLength:"512"`
+	ReturnUrl string `json:"returnUrl" minLength:"1" maxLength:"512" binding:"required"`
 	// Free form description of the order.
 	Description string `json:"description,omitempty" maxLength:"512"`
 
