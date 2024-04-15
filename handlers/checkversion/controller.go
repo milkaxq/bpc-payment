@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/milkaxq/bpcpayment/constants"
 )
 
 // @Summary Check EPG Versions
@@ -15,7 +14,7 @@ import (
 // @Failure 500 {object} EPGVersionsResponse "Check version function error"
 // @Router /check-version [get]
 func CheckVersion(c *gin.Context) {
-	versions := checkEPGVersions(constants.Base.BaseURL)
+	versions := checkEPGVersions()
 
 	if versions.Error1 != "" && versions.Error2 != "" {
 		c.JSON(http.StatusInternalServerError, versions)

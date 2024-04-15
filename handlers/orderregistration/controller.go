@@ -1,7 +1,6 @@
 package orderregistration
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -24,8 +23,18 @@ func OrderRegistration(c *gin.Context) {
 
 	if err := c.BindJSON(&orderRegistrationRequest); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": constants.ErrInvalidRequestBody + err.Error()})
+		return
 	}
 
-	fmt.Println(utils.StructToURLParams(orderRegistrationRequest))
+	orderRegistrationRequest.OrderNumber = utils.GenerateOrderNumber(1, 32)
 
+	urlParams := utils.StructToURLParams(orderRegistrationRequest)
+
+	resp, err := makeOrderRegistration(urlParams)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, resp)
 }

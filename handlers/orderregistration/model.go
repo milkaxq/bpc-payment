@@ -50,7 +50,7 @@ type OrderRegistrationRequest struct {
 		Fields used to store additional information. The type is as follows:
 		{"param":"value","param2":"value2"}
 	*/
-	JsonParams []map[string]string `json:"jsonParams,omitempty" maxLength:"1024"`
+	// JsonParams []map[string]string `json:"jsonParams,omitempty" maxLength:"1024"`
 
 	// Order lifetime
 	/*
@@ -167,7 +167,7 @@ type OrderRegistrationResponse struct {
 	FormUrl string `json:"formUrl,omitempty"`
 
 	// Response code
-	ErrorCode string `json:"errorCode"`
+	ErrorCode int `json:"errorCode"`
 
 	// Error message (in requested language, empty on success)
 	ErrorMessage string `json:"errorMessage,omitempty"`

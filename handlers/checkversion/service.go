@@ -11,7 +11,8 @@ import (
 )
 
 // @Description This function takes a base URL and constructs two separate URLs for EPG data version retrieval. It then calls checkEPGVersion on each URL and returns a combined response object.
-func checkEPGVersions(baseURL string) EPGVersionsResponse {
+func checkEPGVersions() EPGVersionsResponse {
+	baseURL := constants.Base.BaseURL
 	url1 := fmt.Sprintf("https://%s/epg/version.do", baseURL)
 	version1, err1 := checkEPGVersion(url1)
 	url2 := fmt.Sprintf("https://%s/epg/version", baseURL)
@@ -46,7 +47,7 @@ func checkEPGVersion(url string) (string, error) {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return "", errors.New(constants.ErrReadingResponseBdoy + err.Error())
+		return "", errors.New(constants.ErrReadingResponseBody + err.Error())
 	}
 
 	return string(body), nil
