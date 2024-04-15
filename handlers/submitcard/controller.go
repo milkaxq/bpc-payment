@@ -21,7 +21,6 @@ func SubmitCard(c *gin.Context) {
 
 	urlParams := utils.StructToURLParams(submitCardRequest)
 
-	fmt.Println(urlParams)
 	fullUrl := fmt.Sprintf("https://%s/epg/rest/processform.do", constants.Base.BaseURL) + "?" + urlParams
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {

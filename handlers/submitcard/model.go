@@ -18,3 +18,9 @@ type SubmitCardResponse struct {
 	TermUrl   string `json:"termUrl"`
 	ErrorCode int    `json:"errorCode"`
 }
+
+type SubmitCardRedirect struct {
+	PaReq   string `json:"PaReq"`
+	MDORDER string `json:"MD"`
+	TermURL string `json:"TermUrl"`
+}
