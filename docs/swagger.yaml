@@ -101,6 +101,30 @@ definitions:
         description: Identifier for recurring payments (only for recurring payments)
         type: string
     type: object
+  submitcard.RequestIdResponse:
+    properties:
+      request_id:
+        type: string
+    type: object
+  submitcard.SubmitCardRequest:
+    properties:
+      $CVC:
+        type: string
+      $EXPIRY:
+        type: string
+      $PAN:
+        type: string
+      MDORDER:
+        type: string
+      MM:
+        type: string
+      TEXT:
+        type: string
+      YYYY:
+        type: string
+      language:
+        type: string
+    type: object
 info:
   contact: {}
 paths:
@@ -154,6 +178,36 @@ paths:
           schema:
             $ref: '#/definitions/constants.HttpError'
       summary: Order Registration
+      tags:
+      - epg
+  /submit-card:
+    post:
+      consumes:
+      - application/json
+      description: Submit card data to move next into step.
+      parameters:
+      - description: Card submission request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/submitcard.SubmitCardRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Coming request id of otp to use in next request confirmPayment
+          schema:
+            $ref: '#/definitions/submitcard.RequestIdResponse'
+        "400":
+          description: Submit card to bank error
+          schema:
+            $ref: '#/definitions/constants.HttpError'
+        "500":
+          description: Get otp error
+          schema:
+            $ref: '#/definitions/constants.HttpError'
+      summary: Card Submission
       tags:
       - epg
 swagger: "2.0"

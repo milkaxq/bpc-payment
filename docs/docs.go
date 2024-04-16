@@ -94,6 +94,52 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/submit-card": {
+            "post": {
+                "description": "Submit card data to move next into step.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "epg"
+                ],
+                "summary": "Card Submission",
+                "parameters": [
+                    {
+                        "description": "Card submission request body",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/submitcard.SubmitCardRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Coming request id of otp to use in next request confirmPayment",
+                        "schema": {
+                            "$ref": "#/definitions/submitcard.RequestIdResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Submit card to bank error",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    },
+                    "500": {
+                        "description": "Get otp error",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -204,6 +250,43 @@ const docTemplate = `{
                 },
                 "recurrenceId": {
                     "description": "Identifier for recurring payments (only for recurring payments)",
+                    "type": "string"
+                }
+            }
+        },
+        "submitcard.RequestIdResponse": {
+            "type": "object",
+            "properties": {
+                "request_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "submitcard.SubmitCardRequest": {
+            "type": "object",
+            "properties": {
+                "$CVC": {
+                    "type": "string"
+                },
+                "$EXPIRY": {
+                    "type": "string"
+                },
+                "$PAN": {
+                    "type": "string"
+                },
+                "MDORDER": {
+                    "type": "string"
+                },
+                "MM": {
+                    "type": "string"
+                },
+                "TEXT": {
+                    "type": "string"
+                },
+                "YYYY": {
+                    "type": "string"
+                },
+                "language": {
                     "type": "string"
                 }
             }
