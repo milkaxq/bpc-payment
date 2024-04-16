@@ -1,6 +1,9 @@
 package constants
 
-import "os"
+import (
+	"log"
+	"os"
+)
 
 type BaseStruct struct {
 	// bank url < epg_server_IP_address>
@@ -10,5 +13,9 @@ type BaseStruct struct {
 var Base BaseStruct
 
 func InitBase() {
-	Base.BaseURL = os.Getenv("BASE_URL")
+	if baseUrl, ok := os.LookupEnv("BASE_URL"); !ok {
+		log.Panic("please specify base_url in .env file")
+	} else {
+		Base.BaseURL = baseUrl
+	}
 }
