@@ -8,7 +8,7 @@ import (
 )
 
 // Last step of payment
-// @Summary Confirm Payment
+// @Summary Confirm Payment Make This Request Third
 // @Description Confirm Payment by writing otp code.
 // @Tags epg
 // @Accept json

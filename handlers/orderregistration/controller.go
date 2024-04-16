@@ -9,7 +9,7 @@ import (
 )
 
 // OrderRegistration handles the registration of an order.
-// @Summary Order Registration
+// @Summary Order Registration Make this Request First
 // @Description Register an order for payment processing.
 // @Tags epg
 // @Accept json

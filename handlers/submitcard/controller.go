@@ -13,7 +13,7 @@ type RequestIdResponse struct {
 }
 
 // Submit Card handles submit form of card
-// @Summary Card Submission
+// @Summary Card Submission Make This Request Second
 // @Description Submit card data to move next into step.
 // @Tags epg
 // @Accept json
