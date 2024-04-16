@@ -8,6 +8,10 @@ import (
 	"github.com/milkaxq/bpcpayment/utils"
 )
 
+type RequestIdResponse struct {
+	RequestID string `json:"request_id"`
+}
+
 // Submit Card handles submit form of card
 // @Summary Card Submission
 // @Description Submit card data to move next into step.
@@ -19,11 +23,6 @@ import (
 // @Failure 400 {object} constants.HttpError "Submit card to bank error"
 // @Failure 500 {object} constants.HttpError "Get otp error"
 // @Router /submit-card [post]
-
-type RequestIdResponse struct {
-	RequestID string `json:"request_id"`
-}
-
 func SubmitCard(c *gin.Context) {
 	var submitCardRequest SubmitCardRequest
 
