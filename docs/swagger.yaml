@@ -151,7 +151,7 @@ paths:
           description: Some Confirmation Error
           schema:
             $ref: '#/definitions/constants.HttpError'
-      summary: Confirm Payment
+      summary: Confirm Payment Make This Request Third
       tags:
       - epg
   /register-order:
@@ -177,7 +177,7 @@ paths:
           description: Invalid request body or parameters
           schema:
             $ref: '#/definitions/constants.HttpError'
-      summary: Order Registration
+      summary: Order Registration Make this Request First
       tags:
       - epg
   /submit-card:
@@ -207,7 +207,7 @@ paths:
           description: Get otp error
           schema:
             $ref: '#/definitions/constants.HttpError'
-      summary: Card Submission
+      summary: Card Submission Make This Request Second
       tags:
       - epg
 swagger: "2.0"

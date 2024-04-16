@@ -27,7 +27,7 @@ const docTemplate = `{
                 "tags": [
                     "epg"
                 ],
-                "summary": "Confirm Payment",
+                "summary": "Confirm Payment Make This Request Third",
                 "parameters": [
                     {
                         "description": "Payment Confirmation request body",
@@ -67,7 +67,7 @@ const docTemplate = `{
                 "tags": [
                     "epg"
                 ],
-                "summary": "Order Registration",
+                "summary": "Order Registration Make this Request First",
                 "parameters": [
                     {
                         "description": "Order Registration Request Body",
@@ -107,7 +107,7 @@ const docTemplate = `{
                 "tags": [
                     "epg"
                 ],
-                "summary": "Card Submission",
+                "summary": "Card Submission Make This Request Second",
                 "parameters": [
                     {
                         "description": "Card submission request body",
