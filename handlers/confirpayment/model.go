@@ -1,7 +1,10 @@
 package confirpayment
 
 type ConfirmPaymentRequest struct {
-	RequestID    string `json:"request_id"`
+	// Request id comes from previouse request of card submission
+	RequestID string `json:"request_id"`
+	// otp password that comes to phone number
 	PasswordEdit string `json:"passwordEdit"`
-	MDORDER      string `json:"MDORDER"`
+	// md order which was created on order registration
+	MDORDER string `json:"MDORDER"`
 }

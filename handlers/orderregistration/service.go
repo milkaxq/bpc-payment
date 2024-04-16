@@ -11,12 +11,14 @@ import (
 )
 
 func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) {
-	fullUrl := fmt.Sprintf("https://%s/epg/rest/register.do", constants.Base.BaseURL) + "?" + urlParams
+	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.RegisterURL) + "?" + urlParams
 
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {
 		return OrderRegistrationResponse{}, errors.New(constants.ErrCreatingRequest + err.Error())
 	}
+
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)

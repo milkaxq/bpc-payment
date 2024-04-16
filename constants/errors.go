@@ -1,13 +1,14 @@
 package constants
 
 const (
-	ErrInvalidRequestBody   = "invalid request body : "
-	ErrCreatingRequest      = "error creating request: "
-	ErrSengdingRequest      = "error sending request: "
-	ErrUnexpectedStatusCode = "unexpected status code: "
-	ErrReadingResponseBody  = "error reading response body: "
-	ErrCheckingEPGVersion   = "error checking EPG version: "
-	ErrInvalidResposnseBody = "invalid response body: "
+	ErrInvalidRequestBody      = "invalid request body : "
+	ErrCreatingRequest         = "error creating request: "
+	ErrSengdingRequest         = "error sending request: "
+	ErrUnexpectedStatusCode    = "unexpected status code: "
+	ErrReadingResponseBody     = "error reading response body: "
+	ErrCheckingEPGVersion      = "error checking EPG version: "
+	ErrInvalidResposnseBody    = "invalid response body: "
+	ErrParsingHtmlFromResponse = "couldn't parse html from response"
 )
 
 type HttpError struct {

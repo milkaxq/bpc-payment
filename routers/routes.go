@@ -3,7 +3,6 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	docs "github.com/milkaxq/bpcpayment/docs"
-	"github.com/milkaxq/bpcpayment/handlers/checkversion"
 	"github.com/milkaxq/bpcpayment/handlers/confirpayment"
 	"github.com/milkaxq/bpcpayment/handlers/orderregistration"
 	"github.com/milkaxq/bpcpayment/handlers/submitcard"
@@ -20,7 +19,6 @@ func InitRoutes() {
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	v1 := r.Group("/api/v1")
 	{
-		v1.GET("/check-version", checkversion.CheckVersion)
 		v1.POST("/register-order", orderregistration.OrderRegistration)
 		v1.POST("/submit-card", submitcard.SubmitCard)
 		v1.POST("/confirm-payment", confirpayment.ConfirmPayment)

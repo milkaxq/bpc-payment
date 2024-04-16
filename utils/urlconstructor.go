@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"net/url"
 	"reflect"
 	"strings"
 )
@@ -31,7 +32,8 @@ func StructToURLParams(data interface{}) string {
 		// Check if the field value is non-empty
 		if !isEmpty(value) {
 			// Format the query parameter and add it to the slice
-			queryParams = append(queryParams, fmt.Sprintf("%s=%v", tag, value))
+			encodedValue := url.QueryEscape(fmt.Sprintf("%v", value))
+			queryParams = append(queryParams, fmt.Sprintf("%s=%s", tag, encodedValue))
 		}
 	}
 

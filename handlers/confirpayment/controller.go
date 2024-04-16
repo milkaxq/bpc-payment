@@ -1,17 +1,22 @@
 package confirpayment
 
 import (
-	"bytes"
-	"fmt"
 	"net/http"
-	"net/url"
 
 	"github.com/gin-gonic/gin"
 	"github.com/milkaxq/bpcpayment/constants"
-	"github.com/milkaxq/bpcpayment/utils"
-	"golang.org/x/net/html"
 )
 
+// Last step of payment
+// @Summary Confirm Payment
+// @Description Confirm Payment by writing otp code.
+// @Tags epg
+// @Accept json
+// @Produce json
+// @Param requestBody body ConfirmPaymentRequest true "Payment Confirmation request body"
+// @Success 200 {string} string "A string of success payment"
+// @Failure 500 {object} constants.HttpError "Some Confirmation Error"
+// @Router /confirm-payment[post]
 func ConfirmPayment(c *gin.Context) {
 	var confirPaymentRequest ConfirmPaymentRequest
 
@@ -20,55 +25,17 @@ func ConfirmPayment(c *gin.Context) {
 		return
 	}
 
-	formData := url.Values{}
-	formData.Add("request_id", confirPaymentRequest.RequestID)
-	formData.Add("passwordEdit", confirPaymentRequest.PasswordEdit)
-	formData.Add("submitButton", "Tassyklamak")
-	encodedData := formData.Encode()
-
-	fmt.Println(confirPaymentRequest)
-	req, err := http.NewRequest("POST", "https://epg.senagatbank.com.tm/acs/api/3ds/form/otp", bytes.NewBufferString(encodedData))
+	paRes, err := ConfirmPaymenRequest(confirPaymentRequest)
 	if err != nil {
-		fmt.Println(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := FinishPayment(paRes, confirPaymentRequest.MDORDER)
 	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer resp.Body.Close()
-
-	root, err := html.Parse(resp.Body)
-	if err != nil {
-		fmt.Println("Error reading response body:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	paRes := utils.FindPaRes(root)
-	formData = url.Values{}
-	formData.Add("MD", confirPaymentRequest.MDORDER)
-	formData.Add("PaRes", paRes)
-	encodedData = formData.Encode()
-
-	fmt.Println(paRes)
-	req, err = http.NewRequest("POST", "https://epg.senagatbank.com.tm/payments/rest/finish3ds.do", bytes.NewBufferString(encodedData))
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-	client = &http.Client{}
-	resp, err = client.Do(req)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer resp.Body.Close()
-
-	c.JSON(http.StatusOK, "Succesfully Payed")
+	c.JSON(http.StatusOK, resp)
 }
