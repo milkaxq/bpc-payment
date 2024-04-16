@@ -4,6 +4,46 @@
         "contact": {}
     },
     "paths": {
+        "/check-status": {
+            "post": {
+                "description": "Check's order status from bank.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "epg"
+                ],
+                "summary": "Check order status. Make this request finally",
+                "parameters": [
+                    {
+                        "description": "check order status request body",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/checkstatus.OrderStatusRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully checked status",
+                        "schema": {
+                            "$ref": "#/definitions/checkstatus.OrderStatusResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body or parameters",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    }
+                }
+            }
+        },
         "/confirm-payment": {
             "post": {
                 "description": "Confirm Payment by writing otp code.",
@@ -132,6 +172,115 @@
         }
     },
     "definitions": {
+        "checkstatus.Attribute": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "checkstatus.CardAuthInfo": {
+            "type": "object",
+            "properties": {
+                "authorizationResponseId": {
+                    "type": "string"
+                },
+                "cardholderName": {
+                    "type": "string"
+                },
+                "expiration": {
+                    "type": "string"
+                },
+                "pan": {
+                    "type": "string"
+                }
+            }
+        },
+        "checkstatus.MerchantOrderParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "checkstatus.OrderStatusRequest": {
+            "type": "object",
+            "properties": {
+                "orderId": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "checkstatus.OrderStatusResponse": {
+            "type": "object",
+            "properties": {
+                "actionCode": {
+                    "type": "integer"
+                },
+                "actionCodeDescription": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "number"
+                },
+                "attributes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/checkstatus.Attribute"
+                    }
+                },
+                "cardAuthInfo": {
+                    "$ref": "#/definitions/checkstatus.CardAuthInfo"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "integer"
+                },
+                "errorCode": {
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "type": "string"
+                },
+                "fraudLevel": {
+                    "type": "integer"
+                },
+                "ip": {
+                    "type": "string"
+                },
+                "merchantOrderParams": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/checkstatus.MerchantOrderParam"
+                    }
+                },
+                "orderDescription": {
+                    "type": "string"
+                },
+                "orderNumber": {
+                    "type": "string"
+                },
+                "orderStatus": {
+                    "type": "integer"
+                }
+            }
+        },
         "confirpayment.ConfirmPaymentRequest": {
             "type": "object",
             "properties": {

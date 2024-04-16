@@ -1,4 +1,75 @@
 definitions:
+  checkstatus.Attribute:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  checkstatus.CardAuthInfo:
+    properties:
+      authorizationResponseId:
+        type: string
+      cardholderName:
+        type: string
+      expiration:
+        type: string
+      pan:
+        type: string
+    type: object
+  checkstatus.MerchantOrderParam:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+    type: object
+  checkstatus.OrderStatusRequest:
+    properties:
+      orderId:
+        type: string
+      password:
+        type: string
+      userName:
+        type: string
+    type: object
+  checkstatus.OrderStatusResponse:
+    properties:
+      actionCode:
+        type: integer
+      actionCodeDescription:
+        type: string
+      amount:
+        type: number
+      attributes:
+        items:
+          $ref: '#/definitions/checkstatus.Attribute'
+        type: array
+      cardAuthInfo:
+        $ref: '#/definitions/checkstatus.CardAuthInfo'
+      currency:
+        type: string
+      date:
+        type: integer
+      errorCode:
+        type: string
+      errorMessage:
+        type: string
+      fraudLevel:
+        type: integer
+      ip:
+        type: string
+      merchantOrderParams:
+        items:
+          $ref: '#/definitions/checkstatus.MerchantOrderParam'
+        type: array
+      orderDescription:
+        type: string
+      orderNumber:
+        type: string
+      orderStatus:
+        type: integer
+    type: object
   confirpayment.ConfirmPaymentRequest:
     properties:
       MDORDER:
@@ -128,6 +199,32 @@ definitions:
 info:
   contact: {}
 paths:
+  /check-status:
+    post:
+      consumes:
+      - application/json
+      description: Check's order status from bank.
+      parameters:
+      - description: check order status request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/checkstatus.OrderStatusRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully checked status
+          schema:
+            $ref: '#/definitions/checkstatus.OrderStatusResponse'
+        "400":
+          description: Invalid request body or parameters
+          schema:
+            $ref: '#/definitions/constants.HttpError'
+      summary: Check order status. Make this request finally
+      tags:
+      - epg
   /confirm-payment:
     post:
       consumes:

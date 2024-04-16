@@ -3,6 +3,7 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 	docs "github.com/milkaxq/bpcpayment/docs"
+	"github.com/milkaxq/bpcpayment/handlers/checkstatus"
 	"github.com/milkaxq/bpcpayment/handlers/confirpayment"
 	"github.com/milkaxq/bpcpayment/handlers/orderregistration"
 	"github.com/milkaxq/bpcpayment/handlers/submitcard"
@@ -22,6 +23,7 @@ func InitRoutes() {
 		v1.POST("/register-order", orderregistration.OrderRegistration)
 		v1.POST("/submit-card", submitcard.SubmitCard)
 		v1.POST("/confirm-payment", confirpayment.ConfirmPayment)
+		v1.POST("/check-status", checkstatus.CheckStatus)
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()
