@@ -3,12 +3,6 @@ package orderregistration
 import "github.com/milkaxq/bpcpayment/constants"
 
 type OrderRegistrationRequest struct {
-	// User credentials
-	// Login of the API user on whose behalf requests are processed for a particular merchant.
-	Username string `json:"userName" minLength:"1" maxLength:"30" binding:"required"`
-	// User’s password.
-	Password string `json:"password" minLength:"1" maxLength:"30" binding:"required"`
-
 	// Order details
 	/*
 		Number (identifier) of the order in the merchant’s online store system.

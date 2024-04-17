@@ -19,7 +19,7 @@ func ConfirmPaymenRequest(confirPaymentRequest ConfirmPaymentRequest) (string, e
 	formData.Add("submitButton", "Tassyklamak")
 	encodedData := formData.Encode()
 
-	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.OTPURL)
+	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.SenagatBaseURL, constants.OTPURL)
 	req, err := http.NewRequest("POST", fullUrl, bytes.NewBufferString(encodedData))
 	if err != nil {
 		return "", errors.New(constants.ErrCreatingRequest + err.Error())
@@ -49,7 +49,7 @@ func FinishPayment(PaRes, MDOrder string) (string, error) {
 	formData.Add("PaRes", PaRes)
 	encodedData := formData.Encode()
 
-	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.FinishURL)
+	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.SenagatBaseURL, constants.FinishURL)
 	req, err := http.NewRequest("POST", fullUrl, bytes.NewBufferString(encodedData))
 	if err != nil {
 		return "", errors.New(constants.ErrCreatingRequest + err.Error())

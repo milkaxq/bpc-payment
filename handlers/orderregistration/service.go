@@ -11,7 +11,7 @@ import (
 )
 
 func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) {
-	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.RegisterURL) + "?" + urlParams
+	fullUrl := fmt.Sprintf("https://%s%s?userName=%s&password=%s&", constants.Base.SenagatBaseURL, constants.RegisterURL, constants.Base.SenagatUsername, constants.Base.SenagatPassword) + urlParams
 
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {

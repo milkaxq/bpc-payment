@@ -7,15 +7,27 @@ import (
 
 type BaseStruct struct {
 	// bank url < epg_server_IP_address>
-	BaseURL string `json:"base_url" validate:"required" binding:"required"`
+	SenagatBaseURL  string
+	SenagatUsername string
+	SenagatPassword string
 }
 
 var Base BaseStruct
 
 func InitBase() {
-	if baseUrl, ok := os.LookupEnv("BASE_URL"); !ok {
+	if senagatBaseUrl, ok := os.LookupEnv("SENAGAT_BASE_URL"); !ok {
 		log.Panic("please specify base_url in .env file")
 	} else {
-		Base.BaseURL = baseUrl
+		Base.SenagatBaseURL = senagatBaseUrl
+	}
+	if senagatUsername, ok := os.LookupEnv("SENAGAT_USERNAME"); !ok {
+		log.Panic("please specify base_url in .env file")
+	} else {
+		Base.SenagatUsername = senagatUsername
+	}
+	if senagatPassword, ok := os.LookupEnv("SENAGAT_PASSWORD"); !ok {
+		log.Panic("please specify base_url in .env file")
+	} else {
+		Base.SenagatPassword = senagatPassword
 	}
 }

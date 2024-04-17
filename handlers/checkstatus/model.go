@@ -3,9 +3,7 @@ package checkstatus
 import "fmt"
 
 type OrderStatusRequest struct {
-	Username string `json:"userName"`
-	Password string `json:"password"`
-	OrderID  string `json:"orderId"`
+	OrderID string `json:"orderId"`
 }
 
 type OrderStatusResponse struct {

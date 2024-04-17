@@ -15,7 +15,7 @@ import (
 )
 
 func SubmitCardToBank(urlParams string) (SubmitCardResponse, error) {
-	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.ConfirmPaymentURL) + "?" + urlParams
+	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.SenagatBaseURL, constants.ConfirmPaymentURL) + "?" + urlParams
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {
 		return SubmitCardResponse{}, errors.New(constants.ErrCreatingRequest + err.Error())
@@ -77,7 +77,7 @@ func GetOTPPassword(submitCardResponse SubmitCardResponse, MDOrder string) (stri
 	formData.Add("sendButton", "Ugratmak")
 	encodedData = formData.Encode()
 
-	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.BaseURL, constants.OTPURL)
+	fullUrl := fmt.Sprintf("https://%s%s", constants.Base.SenagatBaseURL, constants.OTPURL)
 	req, err = http.NewRequest("POST", fullUrl, bytes.NewBufferString(encodedData))
 	if err != nil {
 		return "", errors.New(constants.ErrCreatingRequest + err.Error())
