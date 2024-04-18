@@ -227,12 +227,6 @@ const docTemplate = `{
             "properties": {
                 "orderId": {
                     "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "userName": {
-                    "type": "string"
                 }
             }
         },
@@ -322,9 +316,7 @@ const docTemplate = `{
             "required": [
                 "amount",
                 "currency",
-                "password",
-                "returnUrl",
-                "userName"
+                "returnUrl"
             ],
             "properties": {
                 "amount": {
@@ -354,12 +346,6 @@ const docTemplate = `{
                     "maxLength": 32,
                     "minLength": 1
                 },
-                "password": {
-                    "description": "User’s password.",
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 1
-                },
                 "returnUrl": {
                     "description": "URL to which the customer is redirected after a successful payment.",
                     "type": "string",
@@ -369,12 +355,6 @@ const docTemplate = `{
                 "sessionTimeoutSecs": {
                     "description": "The order lifespan duration can be taken from the following parameters (from the highest priority to the lowest):\n\t\t· sessionTimeoutSecs transferred in a request. It overrides all other order timeout settings.\n\t\t· If the sessionTimeoutSecs parameter is not specified, the value from the merchant’s settings is used.\n\t\tIt is configured by the Alternative session timeout option that must be enabled and\n\t\tthe Session duration additional parameter that must be specified.\n\t\t· If none of the above mentioned settings is specified\n\t\t(neither sessionTimeoutSecs nor merchant’s timeout),\n\t\tthe default value set in Administration \u003e System settings by the default.session.timeout.milliseconds\n\t\tsystem setting is used (the default value is 1200 seconds) .\n\t\tIf the request contains the expirationDate parameter, the sessionTimeoutSecs parameter is ignored.",
                     "type": "integer"
-                },
-                "userName": {
-                    "description": "User credentials\nLogin of the API user on whose behalf requests are processed for a particular merchant.",
-                    "type": "string",
-                    "maxLength": 30,
-                    "minLength": 1
                 }
             }
         },
@@ -415,27 +395,27 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "$CVC": {
+                    "description": "CVC is secure code on back side of your card",
                     "type": "string"
                 },
                 "$EXPIRY": {
+                    "description": "should be in form like YYYYMM example 202709",
                     "type": "string"
                 },
                 "$PAN": {
+                    "description": "PAN is a number on card 12 digit code",
                     "type": "string"
                 },
                 "MDORDER": {
-                    "type": "string"
-                },
-                "MM": {
+                    "description": "Another meaning of order_id",
                     "type": "string"
                 },
                 "TEXT": {
-                    "type": "string"
-                },
-                "YYYY": {
+                    "description": "Text is card holder name and surname",
                     "type": "string"
                 },
                 "language": {
+                    "description": "language is language",
                     "type": "string"
                 }
             }

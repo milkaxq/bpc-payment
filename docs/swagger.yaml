@@ -28,10 +28,6 @@ definitions:
     properties:
       orderId:
         type: string
-      password:
-        type: string
-      userName:
-        type: string
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -116,11 +112,6 @@ definitions:
         maxLength: 32
         minLength: 1
         type: string
-      password:
-        description: User’s password.
-        maxLength: 30
-        minLength: 1
-        type: string
       returnUrl:
         description: URL to which the customer is redirected after a successful payment.
         maxLength: 512
@@ -140,19 +131,10 @@ definitions:
           contains the expirationDate parameter, the sessionTimeoutSecs parameter
           is ignored."
         type: integer
-      userName:
-        description: |-
-          User credentials
-          Login of the API user on whose behalf requests are processed for a particular merchant.
-        maxLength: 30
-        minLength: 1
-        type: string
     required:
     - amount
     - currency
-    - password
     - returnUrl
-    - userName
     type: object
   orderregistration.OrderRegistrationResponse:
     properties:
@@ -180,20 +162,22 @@ definitions:
   submitcard.SubmitCardRequest:
     properties:
       $CVC:
+        description: CVC is secure code on back side of your card
         type: string
       $EXPIRY:
+        description: should be in form like YYYYMM example 202709
         type: string
       $PAN:
+        description: PAN is a number on card 12 digit code
         type: string
       MDORDER:
-        type: string
-      MM:
+        description: Another meaning of order_id
         type: string
       TEXT:
-        type: string
-      YYYY:
+        description: Text is card holder name and surname
         type: string
       language:
+        description: language is language
         type: string
     type: object
 info:

@@ -1,14 +1,18 @@
 package submitcard
 
 type SubmitCardRequest struct {
-	MDORDER  string `json:"MDORDER"`
-	EXPIRY   string `json:"$EXPIRY"`
-	PAN      string `json:"$PAN"`
-	TEXT     string `json:"TEXT"`
-	CVC      string `json:"$CVC"`
+	// Another meaning of order_id
+	MDORDER string `json:"MDORDER"`
+	// should be in form like YYYYMM example 202709
+	EXPIRY string `json:"$EXPIRY"`
+	// PAN is a number on card 12 digit code
+	PAN string `json:"$PAN"`
+	// Text is card holder name and surname
+	TEXT string `json:"TEXT"`
+	// CVC is secure code on back side of your card
+	CVC string `json:"$CVC"`
+	// language is language
 	Language string `json:"language"`
-	MM       string `json:"MM"`
-	YYYY     string `json:"YYYY"`
 }
 
 type SubmitCardResponse struct {
