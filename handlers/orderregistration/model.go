@@ -19,7 +19,7 @@ type OrderRegistrationRequest struct {
 	// Payment currency code in the ISO 4217 format
 	Currency string `json:"currency" minLength:"3" maxLength:"3" binding:"required"`
 	// URL to which the customer is redirected after a successful payment.
-	ReturnUrl string `json:"returnUrl" minLength:"1" maxLength:"512" binding:"required"`
+	ReturnUrl string `json:"returnUrl" minLength:"1" maxLength:"512"`
 	// Free form description of the order.
 	Description string `json:"description,omitempty" maxLength:"512"`
 
