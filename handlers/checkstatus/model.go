@@ -4,9 +4,9 @@ import "fmt"
 
 type OrderStatusRequest struct {
 	// bank merchant user name
-	Username string `json:"userName" binding:"required"`
+	Username string `json:"-"`
 	// bank merchant passowrd
-	Password string `json:"password" binding:"required"`
+	Password string `json:"-"`
 	// Order id the same as order number
 	OrderID string `json:"orderId"`
 }

@@ -1,10 +1,12 @@
 package checkstatus
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/milkaxq/bpcpayment/constants"
+	"github.com/milkaxq/bpcpayment/utils"
 )
 
 // Check Status checks order status from bank.
@@ -24,6 +26,16 @@ func CheckStatus(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": constants.ErrInvalidRequestBody + err.Error()})
 		return
 	}
+
+	bankModel, expiresAt, err := utils.GetBankModel(orderStatusRequest.OrderID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	}
+	fmt.Println(bankModel)
+	fmt.Println(expiresAt)
+	orderStatusRequest.Username = bankModel.Username
+	orderStatusRequest.Password = bankModel.Password
 
 	orderStatusResponse, err := CheckOrderStatus(orderStatusRequest)
 	if err != nil {

@@ -1,10 +1,12 @@
 package confirpayment
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/milkaxq/bpcpayment/constants"
+	"github.com/milkaxq/bpcpayment/utils"
 )
 
 // Last step of payment
@@ -14,7 +16,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param requestBody body ConfirmPaymentRequest true "Payment Confirmation request body"
-// @Success 200 {string} string "A string of success payment"
+// @Success 200 {object} ResponseWithMessage "Just message that says it was succesfully"
 // @Failure 500 {object} constants.HttpError "Some Confirmation Error"
 // @Router /confirm-payment [post]
 func ConfirmPayment(c *gin.Context) {
@@ -24,6 +26,15 @@ func ConfirmPayment(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": constants.ErrInvalidRequestBody + err.Error()})
 		return
 	}
+
+	bankModel, expiresAt, err := utils.GetBankModel(confirPaymentRequest.MDORDER)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		return
+	}
+	fmt.Println(bankModel)
+	fmt.Println(expiresAt)
+	confirPaymentRequest.RequestID = bankModel.OTPRequestID
 
 	paRes, err := ConfirmPaymenRequest(confirPaymentRequest)
 	if err != nil {
@@ -37,5 +48,5 @@ func ConfirmPayment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, resp)
+	c.JSON(http.StatusOK, gin.H{"message": resp})
 }

@@ -5,6 +5,10 @@ import (
 	"os"
 )
 
+type ResponseWithMessage struct {
+	Message string `json:"message"`
+}
+
 type BaseStruct struct {
 	// bank url < epg_server_IP_address>
 	SenagatBaseURL string

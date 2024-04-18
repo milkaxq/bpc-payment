@@ -7,7 +7,9 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/milkaxq/bpcpayment/config"
 	"github.com/milkaxq/bpcpayment/constants"
+	"github.com/milkaxq/bpcpayment/utils"
 )
 
 func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) {
@@ -45,4 +47,23 @@ func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) 
 	}
 
 	return orderRegistrationResponse, nil
+}
+
+func createNewOrder(orderRegistrationRequest OrderRegistrationRequest, resp OrderRegistrationResponse) error {
+	var bankModel config.BankModel = config.BankModel{
+		Username: orderRegistrationRequest.Username,
+		Password: orderRegistrationRequest.Password,
+		OrderID:  resp.OrderId,
+	}
+	data, err := json.Marshal(bankModel)
+	if err != nil {
+		return err
+	}
+
+	err = utils.CreateNewEntry(resp.OrderId, data, 60)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

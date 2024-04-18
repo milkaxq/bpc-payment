@@ -36,5 +36,11 @@ func OrderRegistration(c *gin.Context) {
 		return
 	}
 
+	err = createNewOrder(orderRegistrationRequest, resp)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	c.JSON(http.StatusOK, resp)
 }
