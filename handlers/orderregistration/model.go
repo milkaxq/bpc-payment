@@ -4,6 +4,11 @@ import "github.com/milkaxq/bpcpayment/constants"
 
 type OrderRegistrationRequest struct {
 	// Order details
+
+	// bank merchant user name
+	Username string `json:"userName" binding:"required"`
+	// bank merchant password
+	Password string `json:"password" binding:"required"`
 	/*
 		Number (identifier) of the order in the merchant’s online store system.
 		It is unique for every store in the system and is generated on the order registration.

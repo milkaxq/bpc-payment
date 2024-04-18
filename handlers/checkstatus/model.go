@@ -3,6 +3,11 @@ package checkstatus
 import "fmt"
 
 type OrderStatusRequest struct {
+	// bank merchant user name
+	Username string `json:"userName" binding:"required"`
+	// bank merchant passowrd
+	Password string `json:"password" binding:"required"`
+	// Order id the same as order number
 	OrderID string `json:"orderId"`
 }
 

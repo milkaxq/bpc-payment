@@ -27,7 +27,17 @@ definitions:
   checkstatus.OrderStatusRequest:
     properties:
       orderId:
+        description: Order id the same as order number
         type: string
+      password:
+        description: bank merchant passowrd
+        type: string
+      userName:
+        description: bank merchant user name
+        type: string
+    required:
+    - password
+    - userName
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -106,11 +116,14 @@ definitions:
         minLength: 2
         type: string
       orderNumber:
-        description: "Order details\n\n\t\tNumber (identifier) of the order in the
-          merchant’s online store system.\n\t\tIt is unique for every store in the
-          system and is generated on the order registration."
+        description: "Number (identifier) of the order in the merchant’s online store
+          system.\n\t\tIt is unique for every store in the system and is generated
+          on the order registration."
         maxLength: 32
         minLength: 1
+        type: string
+      password:
+        description: bank merchant password
         type: string
       returnUrl:
         description: URL to which the customer is redirected after a successful payment.
@@ -131,10 +144,15 @@ definitions:
           contains the expirationDate parameter, the sessionTimeoutSecs parameter
           is ignored."
         type: integer
+      userName:
+        description: bank merchant user name
+        type: string
     required:
     - amount
     - currency
+    - password
     - returnUrl
+    - userName
     type: object
   orderregistration.OrderRegistrationResponse:
     properties:
