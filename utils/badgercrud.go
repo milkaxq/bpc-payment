@@ -10,7 +10,7 @@ import (
 )
 
 func CreateNewEntry(orderID string, data []byte, lifeTime int64) error {
-	err := config.Config.DB.Update(func(txn *badger.Txn) error {
+	err := config.DB.Update(func(txn *badger.Txn) error {
 		e := badger.NewEntry([]byte(orderID), data).WithTTL(time.Duration(lifeTime) * time.Minute)
 		err := txn.SetEntry(e)
 		return err
@@ -25,7 +25,7 @@ func CreateNewEntry(orderID string, data []byte, lifeTime int64) error {
 func GetEntry(orderID string) ([]byte, int64, error) {
 	var valCopy []byte
 	var expiresAt int64
-	err := config.Config.DB.View(func(txn *badger.Txn) error {
+	err := config.DB.View(func(txn *badger.Txn) error {
 		item, err := txn.Get([]byte(orderID))
 		if err != nil {
 			return err

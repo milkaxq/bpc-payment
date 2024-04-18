@@ -40,8 +40,8 @@ func ConfirmPaymenRequest(confirPaymentRequest ConfirmPaymentRequest) (string, e
 	}
 	paRes := utils.FindPaRes(root)
 
-	if paRes != "" {
-		return "", errors.New(constants.ErrInvalidRequestBody)
+	if paRes == "" {
+		return "", errors.New(constants.ErrInvalidRequestBody + "Invalid PaRes")
 	}
 
 	return paRes, nil

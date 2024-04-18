@@ -6,9 +6,7 @@ import (
 	badger "github.com/dgraph-io/badger/v4"
 )
 
-var Config struct {
-	DB *badger.DB
-}
+var DB *badger.DB
 
 func InitDB() {
 	opt := badger.DefaultOptions("").WithInMemory(true)
@@ -18,5 +16,5 @@ func InitDB() {
 		log.Fatal(err)
 	}
 
-	Config.DB = db
+	DB = db
 }
