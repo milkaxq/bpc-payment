@@ -8,10 +8,6 @@ import (
 	"github.com/milkaxq/bpcpayment/utils"
 )
 
-type RequestIdResponse struct {
-	RequestID string `json:"request_id"`
-}
-
 // Submit Card handles submit form of card
 // @Summary Card Submission Make This Request Second
 // @Description Submit card data to move next into step.
@@ -19,7 +15,7 @@ type RequestIdResponse struct {
 // @Accept json
 // @Produce json
 // @Param requestBody body SubmitCardRequest true "Card submission request body"
-// @Success 200 {object} RequestIdResponse "Coming request id of otp to use in next request confirmPayment"
+// @Success 200 {object} constants.ResponseWithMessage "Just message that says it was succesfully"
 // @Failure 400 {object} constants.HttpError "Submit card to bank error"
 // @Failure 500 {object} constants.HttpError "Get otp error"
 // @Router /submit-card [post]
@@ -35,13 +31,29 @@ func SubmitCard(c *gin.Context) {
 
 	submitCardResponse, err := SubmitCardToBank(urlParams)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
-	request_id, err := GetOTPPassword(submitCardResponse, submitCardRequest.MDORDER)
+	bankModel, err := utils.GetBankModel(submitCardRequest.MDORDER)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"request_id": request_id})
+	requestID, err := GetOTPPassword(submitCardResponse, submitCardRequest.MDORDER)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	bankModel.OTPRequestID = requestID
+
+	err = addOTPRequestID(bankModel.OrderID, bankModel)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"message": "Succesfully sended OTP"})
 }

@@ -7,11 +7,13 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/milkaxq/bpcpayment/config"
 	"github.com/milkaxq/bpcpayment/constants"
+	"github.com/milkaxq/bpcpayment/utils"
 )
 
 func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) {
-	fullUrl := fmt.Sprintf("https://%s%s?userName=%s&password=%s&", constants.Base.SenagatBaseURL, constants.RegisterURL, constants.Base.SenagatUsername, constants.Base.SenagatPassword) + urlParams
+	fullUrl := fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.RegisterURL) + urlParams
 
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {
@@ -45,4 +47,23 @@ func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) 
 	}
 
 	return orderRegistrationResponse, nil
+}
+
+func createNewOrder(orderRegistrationRequest OrderRegistrationRequest, resp OrderRegistrationResponse) error {
+	var bankModel config.BankModel = config.BankModel{
+		Username: orderRegistrationRequest.Username,
+		Password: orderRegistrationRequest.Password,
+		OrderID:  resp.OrderId,
+	}
+	data, err := json.Marshal(bankModel)
+	if err != nil {
+		return err
+	}
+
+	err = utils.CreateNewEntry(resp.OrderId, data)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

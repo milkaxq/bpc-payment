@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "4c69d7cc-03f0-40d5-82a8-7a87924c9fb8",
+		"name": "mypayment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28911506"
+	},
+	"item": [
+		{
+			"name": "Register Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"merchant_username\",\n    \"password\": \"merchant_password\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"language\": \"en\",\n    \"sessionTimeoutSecs\": 600\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}register-order",
+					"host": [
+						"{{base_url}}register-order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample Register Order",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"merchant_username\",\n    \"password\": \"merchant_password\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"language\": \"en\",\n    \"sessionTimeoutSecs\": 600\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}register-order",
+							"host": [
+								"{{base_url}}register-order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS, GET, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Apr 2024 15:31:58 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "64"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"orderId\": \"ce338308-6091-4636-b277-f1ba2aa2e855\",\n    \"errorCode\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Submit Card",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"cardPan\",\n  \"TEXT\": \"carholderName\",\n  \"$CVC\": \"CVC\",\n  \"language\": \"en\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}submit-card",
+					"host": [
+						"{{base_url}}submit-card"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample submit Card",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"cardPan\",\n  \"TEXT\": \"carholderName\",\n  \"$CVC\": \"CVC\",\n  \"language\": \"en\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}submit-card",
+							"host": [
+								"{{base_url}}submit-card"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS, GET, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Apr 2024 15:35:27 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Succesfully sended OTP\"\n}"
+				}
+			]
+		},
+		{
+			"name": "submitOTP",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n    \"passwordEdit\": \"96511\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}confirm-payment",
+					"host": [
+						"{{base_url}}confirm-payment"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample submit otp",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n    \"passwordEdit\": \"96511\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}confirm-payment",
+							"host": [
+								"{{base_url}}confirm-payment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS, GET, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Apr 2024 15:36:58 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Succesfully Payed\"\n}"
+				}
+			]
+		},
+		{
+			"name": "CheckStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderId\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}check-status",
+					"host": [
+						"{{base_url}}check-status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Sample CheckStatus",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderId\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}check-status",
+							"host": [
+								"{{base_url}}check-status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS, GET, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 19 Apr 2024 15:37:34 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "559"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"errorCode\": \"0\",\n    \"errorMessage\": \"Success\",\n    \"orderNumber\": \"jBzV\",\n    \"orderStatus\": 2,\n    \"actionCode\": 0,\n    \"actionCodeDescription\": \"Request processed successfully\",\n    \"amount\": 1,\n    \"currency\": \"934\",\n    \"date\": 1713540912025,\n    \"orderDescription\": \"Sample order description\",\n    \"ip\": \"217.174.228.25\",\n    \"merchantOrderParams\": [\n        {\n            \"name\": \"transmissionDate\",\n            \"value\": \"1713541011621\"\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": \"mdOrder\",\n            \"value\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n        }\n    ],\n    \"cardAuthInfo\": {\n        \"expiration\": \"202901\",\n        \"cardholderName\": \"RADO\",\n        \"authorizationResponseId\": \"802984\",\n        \"pan\": \"993470**4221\"\n    },\n    \"fraudLevel\": 0\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:8080/api/v1/"
+		}
+	]
+}

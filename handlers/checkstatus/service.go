@@ -15,7 +15,7 @@ import (
 func CheckOrderStatus(orderStatusRequest OrderStatusRequest) (OrderStatusResponse, error) {
 	urlParams := utils.StructToURLParams(orderStatusRequest)
 
-	fullUrl := fmt.Sprintf("https://%s%s?userName=%s&password=%s&%s", constants.Base.SenagatBaseURL, constants.OrderStatusURL, constants.Base.SenagatUsername, constants.Base.SenagatPassword, urlParams)
+	fullUrl := fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.OrderStatusURL) + urlParams
 
 	req, err := http.NewRequest("POST", fullUrl, nil)
 	if err != nil {

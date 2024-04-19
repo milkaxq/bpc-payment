@@ -27,10 +27,17 @@ func OrderRegistration(c *gin.Context) {
 	}
 
 	orderRegistrationRequest.OrderNumber = utils.GenerateOrderNumber(1, 32)
+	orderRegistrationRequest.Currency = "934"
 
 	urlParams := utils.StructToURLParams(orderRegistrationRequest)
 
 	resp, err := makeOrderRegistration(urlParams)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	err = createNewOrder(orderRegistrationRequest, resp)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

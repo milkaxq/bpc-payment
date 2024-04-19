@@ -81,9 +81,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "A string of success payment",
+                        "description": "Just message that says it was succesfully",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
                         }
                     },
                     "500": {
@@ -161,9 +161,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Coming request id of otp to use in next request confirmPayment",
+                        "description": "Just message that says it was succesfully",
                         "schema": {
-                            "$ref": "#/definitions/submitcard.RequestIdResponse"
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
                         }
                     },
                     "400": {
@@ -224,8 +224,20 @@ const docTemplate = `{
         },
         "checkstatus.OrderStatusRequest": {
             "type": "object",
+            "required": [
+                "orderId"
+            ],
             "properties": {
                 "orderId": {
+                    "description": "Order id the same as order number",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "bank merchant passowrd",
+                    "type": "string"
+                },
+                "userName": {
+                    "description": "bank merchant user name",
                     "type": "string"
                 }
             }
@@ -288,6 +300,10 @@ const docTemplate = `{
         },
         "confirpayment.ConfirmPaymentRequest": {
             "type": "object",
+            "required": [
+                "MDORDER",
+                "passwordEdit"
+            ],
             "properties": {
                 "MDORDER": {
                     "description": "md order which was created on order registration",
@@ -311,12 +327,21 @@ const docTemplate = `{
                 }
             }
         },
+        "constants.ResponseWithMessage": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "orderregistration.OrderRegistrationRequest": {
             "type": "object",
             "required": [
                 "amount",
-                "currency",
-                "returnUrl"
+                "description",
+                "password",
+                "userName"
             ],
             "properties": {
                 "amount": {
@@ -341,20 +366,22 @@ const docTemplate = `{
                     "minLength": 2
                 },
                 "orderNumber": {
-                    "description": "Order details\n\n\t\tNumber (identifier) of the order in the merchant’s online store system.\n\t\tIt is unique for every store in the system and is generated on the order registration.",
+                    "description": "Number (identifier) of the order in the merchant’s online store system.\n\t\tIt is unique for every store in the system and is generated on the order registration.",
                     "type": "string",
                     "maxLength": 32,
                     "minLength": 1
                 },
-                "returnUrl": {
-                    "description": "URL to which the customer is redirected after a successful payment.",
-                    "type": "string",
-                    "maxLength": 512,
-                    "minLength": 1
+                "password": {
+                    "description": "bank merchant password",
+                    "type": "string"
                 },
                 "sessionTimeoutSecs": {
                     "description": "The order lifespan duration can be taken from the following parameters (from the highest priority to the lowest):\n\t\t· sessionTimeoutSecs transferred in a request. It overrides all other order timeout settings.\n\t\t· If the sessionTimeoutSecs parameter is not specified, the value from the merchant’s settings is used.\n\t\tIt is configured by the Alternative session timeout option that must be enabled and\n\t\tthe Session duration additional parameter that must be specified.\n\t\t· If none of the above mentioned settings is specified\n\t\t(neither sessionTimeoutSecs nor merchant’s timeout),\n\t\tthe default value set in Administration \u003e System settings by the default.session.timeout.milliseconds\n\t\tsystem setting is used (the default value is 1200 seconds) .\n\t\tIf the request contains the expirationDate parameter, the sessionTimeoutSecs parameter is ignored.",
                     "type": "integer"
+                },
+                "userName": {
+                    "description": "bank merchant user name",
+                    "type": "string"
                 }
             }
         },
@@ -383,16 +410,16 @@ const docTemplate = `{
                 }
             }
         },
-        "submitcard.RequestIdResponse": {
-            "type": "object",
-            "properties": {
-                "request_id": {
-                    "type": "string"
-                }
-            }
-        },
         "submitcard.SubmitCardRequest": {
             "type": "object",
+            "required": [
+                "$CVC",
+                "$EXPIRY",
+                "$PAN",
+                "MDORDER",
+                "TEXT",
+                "language"
+            ],
             "properties": {
                 "$CVC": {
                     "description": "CVC is secure code on back side of your card",

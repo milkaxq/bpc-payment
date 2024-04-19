@@ -27,7 +27,16 @@ definitions:
   checkstatus.OrderStatusRequest:
     properties:
       orderId:
+        description: Order id the same as order number
         type: string
+      password:
+        description: bank merchant passowrd
+        type: string
+      userName:
+        description: bank merchant user name
+        type: string
+    required:
+    - orderId
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -77,10 +86,18 @@ definitions:
       request_id:
         description: Request id comes from previouse request of card submission
         type: string
+    required:
+    - MDORDER
+    - passwordEdit
     type: object
   constants.HttpError:
     properties:
       error:
+        type: string
+    type: object
+  constants.ResponseWithMessage:
+    properties:
+      message:
         type: string
     type: object
   orderregistration.OrderRegistrationRequest:
@@ -106,16 +123,14 @@ definitions:
         minLength: 2
         type: string
       orderNumber:
-        description: "Order details\n\n\t\tNumber (identifier) of the order in the
-          merchant’s online store system.\n\t\tIt is unique for every store in the
-          system and is generated on the order registration."
+        description: "Number (identifier) of the order in the merchant’s online store
+          system.\n\t\tIt is unique for every store in the system and is generated
+          on the order registration."
         maxLength: 32
         minLength: 1
         type: string
-      returnUrl:
-        description: URL to which the customer is redirected after a successful payment.
-        maxLength: 512
-        minLength: 1
+      password:
+        description: bank merchant password
         type: string
       sessionTimeoutSecs:
         description: "The order lifespan duration can be taken from the following
@@ -131,10 +146,14 @@ definitions:
           contains the expirationDate parameter, the sessionTimeoutSecs parameter
           is ignored."
         type: integer
+      userName:
+        description: bank merchant user name
+        type: string
     required:
     - amount
-    - currency
-    - returnUrl
+    - description
+    - password
+    - userName
     type: object
   orderregistration.OrderRegistrationResponse:
     properties:
@@ -152,11 +171,6 @@ definitions:
         type: string
       recurrenceId:
         description: Identifier for recurring payments (only for recurring payments)
-        type: string
-    type: object
-  submitcard.RequestIdResponse:
-    properties:
-      request_id:
         type: string
     type: object
   submitcard.SubmitCardRequest:
@@ -179,6 +193,13 @@ definitions:
       language:
         description: language is language
         type: string
+    required:
+    - $CVC
+    - $EXPIRY
+    - $PAN
+    - MDORDER
+    - TEXT
+    - language
     type: object
 info:
   contact: {}
@@ -225,9 +246,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: A string of success payment
+          description: Just message that says it was succesfully
           schema:
-            type: string
+            $ref: '#/definitions/constants.ResponseWithMessage'
         "500":
           description: Some Confirmation Error
           schema:
@@ -277,9 +298,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: Coming request id of otp to use in next request confirmPayment
+          description: Just message that says it was succesfully
           schema:
-            $ref: '#/definitions/submitcard.RequestIdResponse'
+            $ref: '#/definitions/constants.ResponseWithMessage'
         "400":
           description: Submit card to bank error
           schema:

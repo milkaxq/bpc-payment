@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/milkaxq/bpcpayment/config"
 	"github.com/milkaxq/bpcpayment/constants"
 	"github.com/milkaxq/bpcpayment/utils"
 	"golang.org/x/net/html"
@@ -92,4 +93,14 @@ func GetOTPPassword(submitCardResponse SubmitCardResponse, MDOrder string) (stri
 	defer resp.Body.Close()
 
 	return request_id, nil
+}
+
+func addOTPRequestID(orderID string, bankModel config.BankModel) error {
+	data, _ := json.Marshal(bankModel)
+
+	err := utils.CreateNewEntry(orderID, data)
+	if err != nil {
+		return err
+	}
+	return nil
 }

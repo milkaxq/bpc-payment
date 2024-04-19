@@ -4,6 +4,11 @@ import "github.com/milkaxq/bpcpayment/constants"
 
 type OrderRegistrationRequest struct {
 	// Order details
+
+	// bank merchant user name
+	Username string `json:"userName" binding:"required"`
+	// bank merchant password
+	Password string `json:"password" binding:"required"`
 	/*
 		Number (identifier) of the order in the merchant’s online store system.
 		It is unique for every store in the system and is generated on the order registration.
@@ -12,11 +17,9 @@ type OrderRegistrationRequest struct {
 	//Order amount in the minor denomination (for example, cents).
 	Amount int64 `json:"amount" minLength:"1" maxLength:"19" binding:"required"`
 	// Payment currency code in the ISO 4217 format
-	Currency string `json:"currency" minLength:"3" maxLength:"3" binding:"required"`
-	// URL to which the customer is redirected after a successful payment.
-	ReturnUrl string `json:"returnUrl" minLength:"1" maxLength:"512" binding:"required"`
+	Currency string `json:"currency" minLength:"3" maxLength:"3"`
 	// Free form description of the order.
-	Description string `json:"description,omitempty" maxLength:"512"`
+	Description string `json:"description,omitempty" maxLength:"512" binding:"required"`
 
 	// Optional fields
 	/*
