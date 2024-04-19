@@ -81,9 +81,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "A string of success payment",
+                        "description": "Just message that says it was succesfully",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
                         }
                     },
                     "500": {
@@ -161,9 +161,9 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "Coming request id of otp to use in next request confirmPayment",
+                        "description": "Just message that says it was succesfully",
                         "schema": {
-                            "$ref": "#/definitions/submitcard.RequestIdResponse"
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
                         }
                     },
                     "400": {
@@ -224,10 +224,6 @@ const docTemplate = `{
         },
         "checkstatus.OrderStatusRequest": {
             "type": "object",
-            "required": [
-                "password",
-                "userName"
-            ],
             "properties": {
                 "orderId": {
                     "description": "Order id the same as order number",
@@ -324,13 +320,20 @@ const docTemplate = `{
                 }
             }
         },
+        "constants.ResponseWithMessage": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "orderregistration.OrderRegistrationRequest": {
             "type": "object",
             "required": [
                 "amount",
                 "currency",
                 "password",
-                "returnUrl",
                 "userName"
             ],
             "properties": {
@@ -402,14 +405,6 @@ const docTemplate = `{
                 },
                 "recurrenceId": {
                     "description": "Identifier for recurring payments (only for recurring payments)",
-                    "type": "string"
-                }
-            }
-        },
-        "submitcard.RequestIdResponse": {
-            "type": "object",
-            "properties": {
-                "request_id": {
                     "type": "string"
                 }
             }

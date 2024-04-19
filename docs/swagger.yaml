@@ -35,9 +35,6 @@ definitions:
       userName:
         description: bank merchant user name
         type: string
-    required:
-    - password
-    - userName
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -91,6 +88,11 @@ definitions:
   constants.HttpError:
     properties:
       error:
+        type: string
+    type: object
+  constants.ResponseWithMessage:
+    properties:
+      message:
         type: string
     type: object
   orderregistration.OrderRegistrationRequest:
@@ -151,7 +153,6 @@ definitions:
     - amount
     - currency
     - password
-    - returnUrl
     - userName
     type: object
   orderregistration.OrderRegistrationResponse:
@@ -170,11 +171,6 @@ definitions:
         type: string
       recurrenceId:
         description: Identifier for recurring payments (only for recurring payments)
-        type: string
-    type: object
-  submitcard.RequestIdResponse:
-    properties:
-      request_id:
         type: string
     type: object
   submitcard.SubmitCardRequest:
@@ -243,9 +239,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: A string of success payment
+          description: Just message that says it was succesfully
           schema:
-            type: string
+            $ref: '#/definitions/constants.ResponseWithMessage'
         "500":
           description: Some Confirmation Error
           schema:
@@ -295,9 +291,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: Coming request id of otp to use in next request confirmPayment
+          description: Just message that says it was succesfully
           schema:
-            $ref: '#/definitions/submitcard.RequestIdResponse'
+            $ref: '#/definitions/constants.ResponseWithMessage'
         "400":
           description: Submit card to bank error
           schema:

@@ -16,7 +16,7 @@ import (
 // @Accept json
 // @Produce json
 // @Param requestBody body ConfirmPaymentRequest true "Payment Confirmation request body"
-// @Success 200 {object} ResponseWithMessage "Just message that says it was succesfully"
+// @Success 200 {object} constants.ResponseWithMessage "Just message that says it was succesfully"
 // @Failure 500 {object} constants.HttpError "Some Confirmation Error"
 // @Router /confirm-payment [post]
 func ConfirmPayment(c *gin.Context) {

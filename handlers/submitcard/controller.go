@@ -16,8 +16,8 @@ import (
 // @Tags epg
 // @Accept json
 // @Produce json
-// @Param requestBody body constants.ResponseWithMessage true "Card submission request body"
-// @Success 200 {object} ResponseWithMessage "Just message that says it was succesfully"
+// @Param requestBody body SubmitCardRequest true "Card submission request body"
+// @Success 200 {object} constants.ResponseWithMessage "Just message that says it was succesfully"
 // @Failure 400 {object} constants.HttpError "Submit card to bank error"
 // @Failure 500 {object} constants.HttpError "Get otp error"
 // @Router /submit-card [post]
