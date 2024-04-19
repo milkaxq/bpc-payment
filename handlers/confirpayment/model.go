@@ -6,5 +6,5 @@ type ConfirmPaymentRequest struct {
 	// otp password that comes to phone number
 	PasswordEdit string `json:"passwordEdit" binding:"required"`
 	// md order which was created on order registration
-	MDORDER string `json:"MDORDER"`
+	MDORDER string `json:"MDORDER" binding:"required"`
 }

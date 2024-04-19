@@ -301,6 +301,7 @@ const docTemplate = `{
         "confirpayment.ConfirmPaymentRequest": {
             "type": "object",
             "required": [
+                "MDORDER",
                 "passwordEdit"
             ],
             "properties": {

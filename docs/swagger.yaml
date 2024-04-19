@@ -87,6 +87,7 @@ definitions:
         description: Request id comes from previouse request of card submission
         type: string
     required:
+    - MDORDER
     - passwordEdit
     type: object
   constants.HttpError:
