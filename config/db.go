@@ -9,9 +9,8 @@ import (
 var DB *badger.DB
 
 func InitDB() {
-	opt := badger.DefaultOptions("").WithInMemory(true)
 
-	db, err := badger.Open(opt)
+	db, err := badger.Open(badger.DefaultOptions("/tmp/badger"))
 	if err != nil {
 		log.Fatal(err)
 	}

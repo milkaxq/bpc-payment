@@ -60,7 +60,7 @@ func createNewOrder(orderRegistrationRequest OrderRegistrationRequest, resp Orde
 		return err
 	}
 
-	err = utils.CreateNewEntry(resp.OrderId, data, 60)
+	err = utils.CreateNewEntry(resp.OrderId, data)
 	if err != nil {
 		return err
 	}

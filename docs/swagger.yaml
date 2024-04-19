@@ -35,6 +35,8 @@ definitions:
       userName:
         description: bank merchant user name
         type: string
+    required:
+    - orderId
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -84,6 +86,8 @@ definitions:
       request_id:
         description: Request id comes from previouse request of card submission
         type: string
+    required:
+    - passwordEdit
     type: object
   constants.HttpError:
     properties:
@@ -127,11 +131,6 @@ definitions:
       password:
         description: bank merchant password
         type: string
-      returnUrl:
-        description: URL to which the customer is redirected after a successful payment.
-        maxLength: 512
-        minLength: 1
-        type: string
       sessionTimeoutSecs:
         description: "The order lifespan duration can be taken from the following
           parameters (from the highest priority to the lowest):\n\t\t· sessionTimeoutSecs
@@ -151,7 +150,7 @@ definitions:
         type: string
     required:
     - amount
-    - currency
+    - description
     - password
     - userName
     type: object
@@ -193,6 +192,13 @@ definitions:
       language:
         description: language is language
         type: string
+    required:
+    - $CVC
+    - $EXPIRY
+    - $PAN
+    - MDORDER
+    - TEXT
+    - language
     type: object
 info:
   contact: {}

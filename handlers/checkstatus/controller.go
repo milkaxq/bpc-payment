@@ -1,7 +1,6 @@
 package checkstatus
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,13 +26,11 @@ func CheckStatus(c *gin.Context) {
 		return
 	}
 
-	bankModel, expiresAt, err := utils.GetBankModel(orderStatusRequest.OrderID)
+	bankModel, err := utils.GetBankModel(orderStatusRequest.OrderID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return
 	}
-	fmt.Println(bankModel)
-	fmt.Println(expiresAt)
 	orderStatusRequest.Username = bankModel.Username
 	orderStatusRequest.Password = bankModel.Password
 

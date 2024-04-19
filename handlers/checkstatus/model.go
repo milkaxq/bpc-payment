@@ -8,7 +8,7 @@ type OrderStatusRequest struct {
 	// bank merchant passowrd
 	Password string `json:"password"`
 	// Order id the same as order number
-	OrderID string `json:"orderId"`
+	OrderID string `json:"orderId" binding:"required"`
 }
 
 type OrderStatusResponse struct {

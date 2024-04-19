@@ -224,6 +224,9 @@ const docTemplate = `{
         },
         "checkstatus.OrderStatusRequest": {
             "type": "object",
+            "required": [
+                "orderId"
+            ],
             "properties": {
                 "orderId": {
                     "description": "Order id the same as order number",
@@ -297,6 +300,9 @@ const docTemplate = `{
         },
         "confirpayment.ConfirmPaymentRequest": {
             "type": "object",
+            "required": [
+                "passwordEdit"
+            ],
             "properties": {
                 "MDORDER": {
                     "description": "md order which was created on order registration",
@@ -332,7 +338,7 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "amount",
-                "currency",
+                "description",
                 "password",
                 "userName"
             ],
@@ -367,12 +373,6 @@ const docTemplate = `{
                 "password": {
                     "description": "bank merchant password",
                     "type": "string"
-                },
-                "returnUrl": {
-                    "description": "URL to which the customer is redirected after a successful payment.",
-                    "type": "string",
-                    "maxLength": 512,
-                    "minLength": 1
                 },
                 "sessionTimeoutSecs": {
                     "description": "The order lifespan duration can be taken from the following parameters (from the highest priority to the lowest):\n\t\t· sessionTimeoutSecs transferred in a request. It overrides all other order timeout settings.\n\t\t· If the sessionTimeoutSecs parameter is not specified, the value from the merchant’s settings is used.\n\t\tIt is configured by the Alternative session timeout option that must be enabled and\n\t\tthe Session duration additional parameter that must be specified.\n\t\t· If none of the above mentioned settings is specified\n\t\t(neither sessionTimeoutSecs nor merchant’s timeout),\n\t\tthe default value set in Administration \u003e System settings by the default.session.timeout.milliseconds\n\t\tsystem setting is used (the default value is 1200 seconds) .\n\t\tIf the request contains the expirationDate parameter, the sessionTimeoutSecs parameter is ignored.",
@@ -411,6 +411,14 @@ const docTemplate = `{
         },
         "submitcard.SubmitCardRequest": {
             "type": "object",
+            "required": [
+                "$CVC",
+                "$EXPIRY",
+                "$PAN",
+                "MDORDER",
+                "TEXT",
+                "language"
+            ],
             "properties": {
                 "$CVC": {
                     "description": "CVC is secure code on back side of your card",

@@ -1,7 +1,6 @@
 package confirpayment
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,13 +26,11 @@ func ConfirmPayment(c *gin.Context) {
 		return
 	}
 
-	bankModel, expiresAt, err := utils.GetBankModel(confirPaymentRequest.MDORDER)
+	bankModel, err := utils.GetBankModel(confirPaymentRequest.MDORDER)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return
 	}
-	fmt.Println(bankModel)
-	fmt.Println(expiresAt)
 	confirPaymentRequest.RequestID = bankModel.OTPRequestID
 
 	paRes, err := ConfirmPaymenRequest(confirPaymentRequest)

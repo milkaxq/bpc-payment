@@ -1,9 +1,7 @@
 package submitcard
 
 import (
-	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/milkaxq/bpcpayment/constants"
@@ -37,13 +35,12 @@ func SubmitCard(c *gin.Context) {
 		return
 	}
 
-	bankModel, expiresAt, err := utils.GetBankModel(submitCardRequest.MDORDER)
+	bankModel, err := utils.GetBankModel(submitCardRequest.MDORDER)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Println(bankModel)
-	fmt.Println(expiresAt)
+
 	requestID, err := GetOTPPassword(submitCardResponse, submitCardRequest.MDORDER)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -52,8 +49,7 @@ func SubmitCard(c *gin.Context) {
 
 	bankModel.OTPRequestID = requestID
 
-	// need to put minutes because in utility function i add entry with minustes
-	err = addOTPRequestID(bankModel.OrderID, bankModel, (expiresAt-time.Now().Unix())/60)
+	err = addOTPRequestID(bankModel.OrderID, bankModel)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

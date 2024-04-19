@@ -95,10 +95,10 @@ func GetOTPPassword(submitCardResponse SubmitCardResponse, MDOrder string) (stri
 	return request_id, nil
 }
 
-func addOTPRequestID(orderID string, bankModel config.BankModel, lifeTime int64) error {
+func addOTPRequestID(orderID string, bankModel config.BankModel) error {
 	data, _ := json.Marshal(bankModel)
 
-	err := utils.CreateNewEntry(orderID, data, lifeTime)
+	err := utils.CreateNewEntry(orderID, data)
 	if err != nil {
 		return err
 	}
