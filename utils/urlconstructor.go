@@ -28,7 +28,9 @@ func StructToURLParams(data interface{}) string {
 			// Strip ",omitempty" from the JSON tag
 			tag = strings.Split(tag, ",")[0]
 		}
-
+		if tag == "api_client" {
+			continue
+		}
 		// Check if the field value is non-empty
 		if !isEmpty(value) {
 			// Format the query parameter and add it to the slice

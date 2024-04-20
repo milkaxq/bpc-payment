@@ -10,7 +10,7 @@ var DB *badger.DB
 
 func InitDB() {
 
-	db, err := badger.Open(badger.DefaultOptions("/tmp/badger"))
+	db, err := badger.Open(badger.DefaultOptions("badger"))
 	if err != nil {
 		log.Fatal(err)
 	}

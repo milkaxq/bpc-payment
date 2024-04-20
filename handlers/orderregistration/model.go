@@ -1,10 +1,8 @@
 package orderregistration
 
-import "github.com/milkaxq/bpcpayment/constants"
-
 type OrderRegistrationRequest struct {
-	// Order details
-
+	// Api client
+	ApiClient string `json:"api_client" binding:"required"`
 	// bank merchant user name
 	Username string `json:"userName" binding:"required"`
 	// bank merchant password
@@ -21,6 +19,7 @@ type OrderRegistrationRequest struct {
 	// Free form description of the order.
 	Description string `json:"description,omitempty" maxLength:"512" binding:"required"`
 
+	ReturnURL string `json:"returnUrl"`
 	// Optional fields
 	/*
 		Language code in the ISO 639-1 format.
@@ -163,58 +162,9 @@ type OrderRegistrationResponse struct {
 	// URL of the payment page (absent on error)
 	FormUrl string `json:"formUrl,omitempty"`
 
-	// Response code
-	ErrorCode int `json:"errorCode"`
-
 	// Error message (in requested language, empty on success)
 	ErrorMessage string `json:"errorMessage,omitempty"`
 
 	// Identifier for recurring payments (only for recurring payments)
 	RecurrenceId string `json:"recurrenceId,omitempty"`
-}
-
-// getErrorString constructs a user-friendly error message based on the ErrorCode and ErrorMessage.
-func (c OrderRegistrationResponse) getErrorString() string {
-	errorMessage := constants.ErrorCodeToMessage[c.ErrorCode]
-
-	switch c.ErrorCode {
-	case constants.ErrorCodeNoError:
-		// No error, nothing to report
-	case constants.ErrorCodeProcessed:
-		errorMessage += "Order already processed or incorrect childId."
-	case constants.ErrorCodeNotPaid:
-		errorMessage += "Order registered but not paid."
-	case constants.ErrorCodeUnknownCurrency:
-		errorMessage += "Unknown currency."
-	case constants.ErrorCodeMissingParameter:
-		errorMessage += "Missing required parameter(s):"
-		if c.ErrorMessage != "" {
-			errorMessage += "\n  - " + c.ErrorMessage
-		}
-	case constants.ErrorCodeIncorrectValue:
-		errorMessage += "Incorrect value for a request parameter or language code."
-	case constants.ErrorCodeAccessDenied:
-		errorMessage += "Access denied or other issues:"
-		switch c.ErrorMessage {
-		case "Merchant must change the password.":
-			errorMessage += "\n  - Merchant password needs to be changed."
-		case "Invalid jsonParams[]":
-			errorMessage += "\n  - Invalid data format in jsonParams."
-		default:
-			errorMessage += "\n  - Access denied. Please check your credentials or contact support."
-		}
-	case constants.ErrorCodeSystemError:
-		errorMessage += "System error. Please try again later."
-	case constants.ErrorCodeInvalidPaymentMethod:
-		errorMessage += "Invalid payment method provided."
-	default:
-		errorMessage += "Unknown error code. Please contact support."
-	}
-
-	// Append additional details from ErrorMessage if present
-	if c.ErrorMessage != "" && errorMessage != "" {
-		errorMessage += "\n  Additional details: " + c.ErrorMessage
-	}
-
-	return errorMessage
 }
