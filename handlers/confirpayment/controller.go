@@ -33,13 +33,13 @@ func ConfirmPayment(c *gin.Context) {
 	}
 	confirPaymentRequest.RequestID = bankModel.OTPRequestID
 
-	paRes, err := ConfirmPaymenRequest(confirPaymentRequest)
+	paRes, err := ConfirmPaymenRequest(confirPaymentRequest, bankModel.ApiClient)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	resp, err := FinishPayment(paRes, confirPaymentRequest.MDORDER)
+	resp, err := finishPayment(paRes, confirPaymentRequest.MDORDER, bankModel.ApiClient)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

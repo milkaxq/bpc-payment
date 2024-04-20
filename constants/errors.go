@@ -9,6 +9,8 @@ const (
 	ErrCheckingEPGVersion      = "error checking EPG version: "
 	ErrInvalidResposnseBody    = "invalid response body: "
 	ErrParsingHtmlFromResponse = "couldn't parse html from response"
+	ErrSendingOTP              = "error sending otp: "
+	ErrConfirmPayment          = "error on payment confiramtion: "
 )
 
 type HttpError struct {

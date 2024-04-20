@@ -12,12 +12,16 @@ import (
 	"github.com/milkaxq/bpcpayment/utils"
 )
 
-func CheckOrderStatus(orderStatusRequest OrderStatusRequest) (OrderStatusResponse, error) {
+func CheckOrderStatus(orderStatusRequest OrderStatusRequest, apiClient string) (OrderStatusResponse, error) {
 	urlParams := utils.StructToURLParams(orderStatusRequest)
+	var fullURL string
+	if apiClient == "senagat" {
+		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.SenagatOrderStatusURL) + urlParams
+	} else if apiClient == "halkbank" {
+		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.HalkBaseURL, constants.HalkBankOrderStatusURL) + urlParams
+	}
 
-	fullUrl := fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.OrderStatusURL) + urlParams
-
-	req, err := http.NewRequest("POST", fullUrl, nil)
+	req, err := http.NewRequest("POST", fullURL, nil)
 	if err != nil {
 		return OrderStatusResponse{}, errors.New(constants.ErrCreatingRequest + err.Error())
 	}
