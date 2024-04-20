@@ -12,10 +12,15 @@ import (
 	"github.com/milkaxq/bpcpayment/utils"
 )
 
-func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) {
-	fullUrl := fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.RegisterURL) + urlParams
+func makeOrderRegistration(apiclient, urlParams string) (OrderRegistrationResponse, error) {
+	var fullURL string
+	if apiclient == "senagat" {
+		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.SenagatRegisterURL) + urlParams
+	} else if apiclient == "halkbank" {
+		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.HalkBaseURL, constants.HalkBankRegisterURL) + urlParams
+	}
 
-	req, err := http.NewRequest("POST", fullUrl, nil)
+	req, err := http.NewRequest("POST", fullURL, nil)
 	if err != nil {
 		return OrderRegistrationResponse{}, errors.New(constants.ErrCreatingRequest + err.Error())
 	}
@@ -42,8 +47,8 @@ func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) 
 		return OrderRegistrationResponse{}, errors.New(constants.ErrReadingResponseBody + err.Error())
 	}
 
-	if orderRegistrationResponse.ErrorCode != 0 {
-		return OrderRegistrationResponse{}, errors.New(constants.ErrInvalidResposnseBody + orderRegistrationResponse.getErrorString())
+	if orderRegistrationResponse.ErrorMessage != "" {
+		return OrderRegistrationResponse{}, errors.New(constants.ErrInvalidResposnseBody + orderRegistrationResponse.ErrorMessage)
 	}
 
 	return orderRegistrationResponse, nil
@@ -51,9 +56,10 @@ func makeOrderRegistration(urlParams string) (OrderRegistrationResponse, error) 
 
 func createNewOrder(orderRegistrationRequest OrderRegistrationRequest, resp OrderRegistrationResponse) error {
 	var bankModel config.BankModel = config.BankModel{
-		Username: orderRegistrationRequest.Username,
-		Password: orderRegistrationRequest.Password,
-		OrderID:  resp.OrderId,
+		ApiClient: orderRegistrationRequest.ApiClient,
+		Username:  orderRegistrationRequest.Username,
+		Password:  orderRegistrationRequest.Password,
+		OrderID:   resp.OrderId,
 	}
 	data, err := json.Marshal(bankModel)
 	if err != nil {

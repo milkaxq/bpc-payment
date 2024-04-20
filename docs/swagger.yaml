@@ -105,6 +105,9 @@ definitions:
       amount:
         description: Order amount in the minor denomination (for example, cents).
         type: integer
+      api_client:
+        description: Api client
+        type: string
       currency:
         description: Payment currency code in the ISO 4217 format
         maxLength: 3
@@ -132,6 +135,8 @@ definitions:
       password:
         description: bank merchant password
         type: string
+      returnUrl:
+        type: string
       sessionTimeoutSecs:
         description: "The order lifespan duration can be taken from the following
           parameters (from the highest priority to the lowest):\n\t\t· sessionTimeoutSecs
@@ -151,15 +156,13 @@ definitions:
         type: string
     required:
     - amount
+    - api_client
     - description
     - password
     - userName
     type: object
   orderregistration.OrderRegistrationResponse:
     properties:
-      errorCode:
-        description: Response code
-        type: integer
       errorMessage:
         description: Error message (in requested language, empty on success)
         type: string

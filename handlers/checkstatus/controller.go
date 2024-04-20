@@ -34,7 +34,7 @@ func CheckStatus(c *gin.Context) {
 	orderStatusRequest.Username = bankModel.Username
 	orderStatusRequest.Password = bankModel.Password
 
-	orderStatusResponse, err := CheckOrderStatus(orderStatusRequest)
+	orderStatusResponse, err := CheckOrderStatus(orderStatusRequest, bankModel.ApiClient)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

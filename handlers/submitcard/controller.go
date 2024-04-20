@@ -26,14 +26,8 @@ func SubmitCard(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": constants.ErrInvalidRequestBody + err.Error()})
 		return
 	}
-
-	urlParams := utils.StructToURLParams(submitCardRequest)
-
-	submitCardResponse, err := SubmitCardToBank(urlParams)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+	// impossibly important
+	submitCardRequest.Language = "ru"
 
 	bankModel, err := utils.GetBankModel(submitCardRequest.MDORDER)
 	if err != nil {
@@ -41,7 +35,13 @@ func SubmitCard(c *gin.Context) {
 		return
 	}
 
-	requestID, err := GetOTPPassword(submitCardResponse, submitCardRequest.MDORDER)
+	submitCardResponse, err := SubmitCardToBank(bankModel.ApiClient, submitCardRequest)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	requestID, err := getOTPPassword(submitCardResponse, submitCardRequest.MDORDER, bankModel.ApiClient)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
