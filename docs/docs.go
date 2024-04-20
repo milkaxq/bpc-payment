@@ -350,7 +350,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "api_client": {
-                    "description": "Api client",
+                    "description": "Api client please specify this this should be either \"halkbank\" or \"senagat\"",
                     "type": "string"
                 },
                 "currency": {

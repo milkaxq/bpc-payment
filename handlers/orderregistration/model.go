@@ -1,7 +1,7 @@
 package orderregistration
 
 type OrderRegistrationRequest struct {
-	// Api client
+	// Api client please specify this this should be either "halkbank" or "senagat"
 	ApiClient string `json:"api_client" binding:"required"`
 	// bank merchant user name
 	Username string `json:"userName" binding:"required"`

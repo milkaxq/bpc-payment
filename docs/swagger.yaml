@@ -106,7 +106,8 @@ definitions:
         description: Order amount in the minor denomination (for example, cents).
         type: integer
       api_client:
-        description: Api client
+        description: Api client please specify this this should be either "halkbank"
+          or "senagat"
         type: string
       currency:
         description: Payment currency code in the ISO 4217 format
