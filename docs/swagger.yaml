@@ -177,6 +177,14 @@ definitions:
         description: Identifier for recurring payments (only for recurring payments)
         type: string
     type: object
+  resendpassword.ResendPasswordRequest:
+    properties:
+      order_id:
+        description: The same as MDORDER
+        type: string
+    required:
+    - order_id
+    type: object
   submitcard.SubmitCardRequest:
     properties:
       $CVC:
@@ -284,6 +292,32 @@ paths:
           schema:
             $ref: '#/definitions/constants.HttpError'
       summary: Order Registration Make this Request First
+      tags:
+      - epg
+  /resend-password:
+    post:
+      consumes:
+      - application/json
+      description: Confirm Payment by writing otp code.
+      parameters:
+      - description: Resend Password Request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/resendpassword.ResendPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Just message that says it was succesfully
+          schema:
+            $ref: '#/definitions/constants.ResponseWithMessage'
+        "500":
+          description: Some Confirmation Error
+          schema:
+            $ref: '#/definitions/constants.HttpError'
+      summary: Confirm Payment Make This Request Third
       tags:
       - epg
   /submit-card:

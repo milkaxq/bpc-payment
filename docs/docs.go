@@ -135,6 +135,46 @@ const docTemplate = `{
                 }
             }
         },
+        "/resend-password": {
+            "post": {
+                "description": "Confirm Payment by writing otp code.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "epg"
+                ],
+                "summary": "Confirm Payment Make This Request Third",
+                "parameters": [
+                    {
+                        "description": "Resend Password Request body",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/resendpassword.ResendPasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Just message that says it was succesfully",
+                        "schema": {
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
+                        }
+                    },
+                    "500": {
+                        "description": "Some Confirmation Error",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    }
+                }
+            }
+        },
         "/submit-card": {
             "post": {
                 "description": "Submit card data to move next into step.",
@@ -410,6 +450,18 @@ const docTemplate = `{
                 },
                 "recurrenceId": {
                     "description": "Identifier for recurring payments (only for recurring payments)",
+                    "type": "string"
+                }
+            }
+        },
+        "resendpassword.ResendPasswordRequest": {
+            "type": "object",
+            "required": [
+                "order_id"
+            ],
+            "properties": {
+                "order_id": {
+                    "description": "The same as MDORDER",
                     "type": "string"
                 }
             }
