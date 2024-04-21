@@ -8,12 +8,24 @@
 	"item": [
 		{
 			"name": "Register Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"userName\": \"merchant_username\",\n    \"password\": \"merchant_password\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"language\": \"en\",\n    \"sessionTimeoutSecs\": 600\n}",
+					"raw": "{\n    \"api_client\": \"halkbank\",\n    \"userName\": \"********\",\n    \"password\": \"********\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -25,17 +37,18 @@
 					"host": [
 						"{{base_url}}register-order"
 					]
-				}
+				},
+				"description": "### Register Order\n\nThe `register-order` endpoint is used to register a new order.\n\n#### Request Body\n\n- `api_client` (string): The client API key.\n- `userName` (string): The username of the bank merchat.\n- `password` (string): The password of the bank merchant.\n- `amount` (number): The amount of the order.\n- `description` (string): A description of the order.\n- `sessionTimeoutSecs` (number): The session timeout duration in seconds.\n    \n\n#### Response\n\n- `orderId` (string): The ID of the registered order.\n- `formUrl` (string): The URL for the order form."
 			},
 			"response": [
 				{
-					"name": "Sample Register Order",
+					"name": "Senagat Dowran Register Order",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\": \"merchant_username\",\n    \"password\": \"merchant_password\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"language\": \"en\",\n    \"sessionTimeoutSecs\": 600\n}",
+							"raw": "{\n    \"api_client\": \"senagat\",\n    \"userName\": \"*******\",\n    \"password\": \"*******\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,15 +88,15 @@
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 19 Apr 2024 15:31:58 GMT"
+							"value": "Sat, 20 Apr 2024 13:58:21 GMT"
 						},
 						{
 							"key": "Content-Length",
-							"value": "64"
+							"value": "201"
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"orderId\": \"ce338308-6091-4636-b277-f1ba2aa2e855\",\n    \"errorCode\": 0\n}"
+					"body": "{\n    \"orderId\": \"736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff\",\n    \"formUrl\": \"https://epg.senagatbank.com.tm/payments/merchants/demir_yollary/payment.html?mdOrder=736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff&language=ru\"\n}"
 				}
 			]
 		},
@@ -94,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"cardPan\",\n  \"TEXT\": \"carholderName\",\n  \"$CVC\": \"CVC\",\n  \"language\": \"en\"\n}",
+					"raw": "{\n  \"MDORDER\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\",\n  \"$EXPIRY\": \"203209\",\n  \"$PAN\": \"9934***********70\",\n  \"TEXT\": \"Test\",\n  \"$CVC\": \"***\",\n  \"language\": \"ru\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -106,17 +119,18 @@
 					"host": [
 						"{{base_url}}submit-card"
 					]
-				}
+				},
+				"description": "### Submit Card\n\nThis endpoint is used to submit card details.\n\n#### Request Body\n\n- `MDORDER` (string): The MDORDER parameter.\n- `$EXPIRY` (string): The expiry parameter.\n- `$PAN` (string): The PAN parameter.\n- `TEXT` (string): The TEXT parameter.\n- `$CVC` (string): The CVC parameter.\n- `language` (string): The language parameter.\n    \n\n#### Response\n\n- `message` (string): A message indicating the result of the card submission."
 			},
 			"response": [
 				{
-					"name": "Sample submit Card",
+					"name": "Senagat Dowran Submit Card",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"cardPan\",\n  \"TEXT\": \"carholderName\",\n  \"$CVC\": \"CVC\",\n  \"language\": \"en\"\n}",
+							"raw": "{\n  \"MDORDER\": \"d6357390-c65d-4907-a822-5103bae37166\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"9934*********21\",\n  \"TEXT\": \"TEST\",\n  \"$CVC\": \"***\",\n  \"language\": \"ru\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -156,7 +170,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 19 Apr 2024 15:35:27 GMT"
+							"value": "Sat, 20 Apr 2024 13:59:53 GMT"
 						},
 						{
 							"key": "Content-Length",
@@ -175,7 +189,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n    \"passwordEdit\": \"96511\"\n}",
+					"raw": "{\n    \"MDORDER\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\",\n    \"passwordEdit\": \"51520\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -187,17 +201,18 @@
 					"host": [
 						"{{base_url}}confirm-payment"
 					]
-				}
+				},
+				"description": "This endpoint is used to confirm a payment via an HTTP POST request to {{base_url}}confirm-payment. The request should include a payload in raw format with keys \"MDORDER\" and \"passwordEdit\". Upon successful confirmation, the response will include a message confirming the payment."
 			},
 			"response": [
 				{
-					"name": "Sample submit otp",
+					"name": "Dowran Senagat Submit OTP",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"MDORDER\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\",\n    \"passwordEdit\": \"96511\"\n}",
+							"raw": "{\n    \"MDORDER\": \"d6357390-c65d-4907-a822-5103bae37166\",\n    \"passwordEdit\": \"77256\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -237,7 +252,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 19 Apr 2024 15:36:58 GMT"
+							"value": "Sat, 20 Apr 2024 14:00:14 GMT"
 						},
 						{
 							"key": "Content-Length",
@@ -256,7 +271,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"orderId\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n}",
+					"raw": "{\n    \"orderId\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -268,17 +283,18 @@
 					"host": [
 						"{{base_url}}check-status"
 					]
-				}
+				},
+				"description": "### Check Status\n\nThis endpoint is used to check the status of an order by making an HTTP POST request to `{{base_url}}check-status`.\n\n**Request Body**\n\n- The request should include a JSON payload with the following parameter:\n    - `orderId`: (string) The ID of the order to be checked.\n\n**Response**\n\n- `errorCode`: (string) The error code, if any.\n- `errorMessage`: (string) The error message, if any.\n- `orderNumber`: (string) The order number.\n- `orderStatus`: (integer) The status of the order.\n- `actionCode`: (integer) The action code for the order status.\n- `actionCodeDescription`: (string) Description of the action code.\n- `amount`: (integer) The amount related to the order.\n- `currency`: (string) The currency of the order.\n- `date`: (integer) The date related to the order.\n- `orderDescription`: (string) Description of the order.\n- `ip`: (string) The IP address related to the order.\n- `merchantOrderParams`: (array) Array of name-value pairs for merchant order parameters.\n    - `name`: (string) Name of the parameter.\n    - `value`: (string) Value of the parameter.\n- `attributes`: (array) Array of name-value pairs for order attributes.\n    - `name`: (string) Name of the attribute.\n    - `value`: (string) Value of the attribute.\n- `cardAuthInfo`: (object) Information related to card authorization.\n    - `expiration`: (string) Expiration date of the card.\n    - `cardholderName`: (string) Name of the cardholder.\n    - `authorizationResponseId`: (string) ID for the authorization response.\n    - `pan`: (string) Primary Account Number (PAN) of the card.\n- `fraudLevel`: (integer) The level of fraud associated with the order."
 			},
 			"response": [
 				{
-					"name": "Sample CheckStatus",
+					"name": "Dorwan Senagat Check Status",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"orderId\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n}",
+							"raw": "{\n    \"orderId\": \"736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -318,15 +334,97 @@
 						},
 						{
 							"key": "Date",
-							"value": "Fri, 19 Apr 2024 15:37:34 GMT"
+							"value": "Sat, 20 Apr 2024 14:00:21 GMT"
 						},
 						{
 							"key": "Content-Length",
-							"value": "559"
+							"value": "594"
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"errorCode\": \"0\",\n    \"errorMessage\": \"Success\",\n    \"orderNumber\": \"jBzV\",\n    \"orderStatus\": 2,\n    \"actionCode\": 0,\n    \"actionCodeDescription\": \"Request processed successfully\",\n    \"amount\": 1,\n    \"currency\": \"934\",\n    \"date\": 1713540912025,\n    \"orderDescription\": \"Sample order description\",\n    \"ip\": \"217.174.228.25\",\n    \"merchantOrderParams\": [\n        {\n            \"name\": \"transmissionDate\",\n            \"value\": \"1713541011621\"\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": \"mdOrder\",\n            \"value\": \"69bf3ed4-4de0-464e-970c-ba3b57022b62\"\n        }\n    ],\n    \"cardAuthInfo\": {\n        \"expiration\": \"202901\",\n        \"cardholderName\": \"RADO\",\n        \"authorizationResponseId\": \"802984\",\n        \"pan\": \"993470**4221\"\n    },\n    \"fraudLevel\": 0\n}"
+					"body": "{\n    \"errorCode\": \"0\",\n    \"errorMessage\": \"Success\",\n    \"orderNumber\": \"******************\",\n    \"orderStatus\": 2,\n    \"actionCode\": 0,\n    \"actionCodeDescription\": \"Request processed successfully\",\n    \"amount\": 1,\n    \"currency\": \"934\",\n    \"date\": 1713621495293,\n    \"orderDescription\": \"Sample order description\",\n    \"ip\": \"217.174.228.25\",\n    \"merchantOrderParams\": [\n        {\n            \"name\": \"transmissionDate\",\n            \"value\": \"1713621607725\"\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": \"mdOrder\",\n            \"value\": \"*************************\"\n        }\n    ],\n    \"cardAuthInfo\": {\n        \"expiration\": \"202901\",\n        \"cardholderName\": \"****** ******\",\n        \"authorizationResponseId\": \"869184\",\n        \"pan\": \"9934*******21\"\n    },\n    \"fraudLevel\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Resend Password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"order_id\":\"4efc236b-e6b4-4af2-acc8-2d88138546e9\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}resend-password",
+					"host": [
+						"{{base_url}}resend-password"
+					]
+				},
+				"description": "This endpoint is used to resend a password for a specific order. The HTTP POST request should be made to {{base_url}}resend-password with a payload containing the order_id.\n\n### Request Body\n\n- order_id (string, required): The ID of the order for which the password needs to be resent.\n    \n\n### Response\n\n- message (string): A message indicating the status of the password resend operation.\n    \n\n#### Example\n\nRequest:\n\n``` json\n{\n  \"order_id\": \"example_order_id\"\n}\n\n ```\n\nResponse:\n\n``` json\n{\n  \"message\": \"Password resend successful\"\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Dowran Senagat Resend Password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"order_id\":\"d6357390-c65d-4907-a822-5103bae37166\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}resend-password",
+							"host": [
+								"{{base_url}}resend-password"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, OPTIONS, GET, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 21 Apr 2024 13:33:28 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "38"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Succesfully Resended OTP\"\n}"
 				}
 			]
 		}
