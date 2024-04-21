@@ -11,6 +11,7 @@ const (
 	ErrParsingHtmlFromResponse = "couldn't parse html from response"
 	ErrSendingOTP              = "error sending otp: "
 	ErrConfirmPayment          = "error on payment confiramtion: "
+	ErrOTPRequestID            = "firstly should request for otp"
 )
 
 type HttpError struct {

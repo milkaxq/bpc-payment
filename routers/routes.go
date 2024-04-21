@@ -6,6 +6,7 @@ import (
 	"github.com/milkaxq/bpcpayment/handlers/checkstatus"
 	"github.com/milkaxq/bpcpayment/handlers/confirpayment"
 	"github.com/milkaxq/bpcpayment/handlers/orderregistration"
+	"github.com/milkaxq/bpcpayment/handlers/resendpassword"
 	"github.com/milkaxq/bpcpayment/handlers/submitcard"
 	"github.com/milkaxq/bpcpayment/middleware"
 	swaggerfiles "github.com/swaggo/files"
@@ -26,6 +27,7 @@ func InitRoutes() {
 		v1.POST("/submit-card", submitcard.SubmitCard)
 		v1.POST("/confirm-payment", confirpayment.ConfirmPayment)
 		v1.POST("/check-status", checkstatus.CheckStatus)
+		v1.POST("/resend-password", resendpassword.ResendPassword)
 	}
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	r.Run()
