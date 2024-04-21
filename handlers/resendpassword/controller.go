@@ -36,7 +36,7 @@ func ResendPassword(c *gin.Context) {
 		return
 	}
 
-	resp, err := resendOTPRequest(bankModel.OTPRequestID, bankModel.ApiClient)
+	resp, err := resendOTPRequest(bankModel)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err})
 		return

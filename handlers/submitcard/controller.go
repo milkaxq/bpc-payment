@@ -48,7 +48,6 @@ func SubmitCard(c *gin.Context) {
 	}
 
 	bankModel.OTPRequestID = requestID
-
 	err = addOTPRequestID(bankModel.OrderID, bankModel)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

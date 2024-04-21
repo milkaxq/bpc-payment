@@ -7,21 +7,30 @@ import (
 	"net/http"
 	"net/url"
 
+	"github.com/milkaxq/bpcpayment/config"
 	"github.com/milkaxq/bpcpayment/constants"
 )
 
-func resendOTPRequest(requestID, apiClient string) (string, error) {
+func resendOTPRequest(bankModel config.BankModel) (string, error) {
 	formData := url.Values{}
-	formData.Add("request_id", requestID)
-	formData.Add("resendButton", "Kody gaýtadan ugratmak")
-	formData.Add("passwordEdit", "")
+	if bankModel.ApiClient == "senagat" {
+		formData.Add("request_id", bankModel.OTPRequestID)
+		formData.Add("resendButton", "Kody gaýtadan ugratmak")
+		formData.Add("passwordEdit", "")
+	} else if bankModel.ApiClient == "halkbank" {
+		formData.Add("authForm", "authForm")
+		formData.Add("request_id", bankModel.OTPRequestID)
+		formData.Add("pwdInputVisible", "")
+		formData.Add("resendPasswordLink", "resendPasswordLink")
+	}
+
 	encodedData := formData.Encode()
 
 	var fullURL string
-	if apiClient == "senagat" {
+	if bankModel.ApiClient == "senagat" {
 		fullURL = fmt.Sprintf("https://%s%s", constants.Base.SenagatBaseURL, constants.SenagatOTPURL)
-	} else if apiClient == "halkbank" {
-		fullURL = fmt.Sprintf("https://%s%s", constants.Base.HalkBaseURL, constants.HalkBankOtpUrl)
+	} else if bankModel.ApiClient == "halkbank" {
+		fullURL = fmt.Sprintf("https://%s", constants.HalkBankOtpUrl)
 	}
 
 	req, err := http.NewRequest("POST", fullURL, bytes.NewBufferString(encodedData))
