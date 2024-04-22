@@ -8,6 +8,15 @@ import (
 	"github.com/milkaxq/bpcpayment/utils"
 )
 
+// @Summary Check order status. Make this request finally
+// @Description Check's order status from bank.
+// @Tags epg
+// @Accept json
+// @Produce json
+// @Param requestBody body RefundRequestBody true "amount and order id of refunding order"
+// @Success 200 {object} constants.ResponseWithMessage "Just message that says it was succesfully"
+// @Failure 400 {object} constants.HttpError "Invalid request body or parameters"
+// @Router /refund [post]
 func Refund(c *gin.Context) {
 	var refundRequest RefundRequestBody
 

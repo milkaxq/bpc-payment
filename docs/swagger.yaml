@@ -177,6 +177,13 @@ definitions:
         description: Identifier for recurring payments (only for recurring payments)
         type: string
     type: object
+  refund.RefundRequestBody:
+    properties:
+      amount:
+        type: string
+      order_id:
+        type: string
+    type: object
   resendpassword.ResendPasswordRequest:
     properties:
       order_id:
@@ -266,6 +273,32 @@ paths:
           schema:
             $ref: '#/definitions/constants.HttpError'
       summary: Confirm Payment Make This Request Third
+      tags:
+      - epg
+  /refund:
+    post:
+      consumes:
+      - application/json
+      description: Check's order status from bank.
+      parameters:
+      - description: amount and order id of refunding order
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/refund.RefundRequestBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Just message that says it was succesfully
+          schema:
+            $ref: '#/definitions/constants.ResponseWithMessage'
+        "400":
+          description: Invalid request body or parameters
+          schema:
+            $ref: '#/definitions/constants.HttpError'
+      summary: Check order status. Make this request finally
       tags:
       - epg
   /register-order:

@@ -95,6 +95,46 @@ const docTemplate = `{
                 }
             }
         },
+        "/refund": {
+            "post": {
+                "description": "Check's order status from bank.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "epg"
+                ],
+                "summary": "Check order status. Make this request finally",
+                "parameters": [
+                    {
+                        "description": "amount and order id of refunding order",
+                        "name": "requestBody",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/refund.RefundRequestBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Just message that says it was succesfully",
+                        "schema": {
+                            "$ref": "#/definitions/constants.ResponseWithMessage"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request body or parameters",
+                        "schema": {
+                            "$ref": "#/definitions/constants.HttpError"
+                        }
+                    }
+                }
+            }
+        },
         "/register-order": {
             "post": {
                 "description": "Register an order for payment processing.",
@@ -450,6 +490,17 @@ const docTemplate = `{
                 },
                 "recurrenceId": {
                     "description": "Identifier for recurring payments (only for recurring payments)",
+                    "type": "string"
+                }
+            }
+        },
+        "refund.RefundRequestBody": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "string"
+                },
+                "order_id": {
                     "type": "string"
                 }
             }
