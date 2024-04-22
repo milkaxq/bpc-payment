@@ -12,7 +12,7 @@ import (
 	"golang.org/x/net/html"
 )
 
-func ConfirmPaymenRequest(confirPaymentRequest ConfirmPaymentRequest, apiClient string) (string, error) {
+func confirmPaymenRequest(confirPaymentRequest ConfirmPaymentRequest, apiClient string) (string, error) {
 	var (
 		resp *http.Response
 		err  error
@@ -25,8 +25,8 @@ func ConfirmPaymenRequest(confirPaymentRequest ConfirmPaymentRequest, apiClient 
 	if err != nil {
 		return "", errors.New(constants.ErrConfirmPayment + err.Error())
 	}
-
 	defer resp.Body.Close()
+
 	root, err := html.Parse(resp.Body)
 	if err != nil {
 		return "", errors.New(constants.ErrParsingHtmlFromResponse + err.Error())

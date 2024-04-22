@@ -11,4 +11,6 @@ const (
 	SenagatOrderStatusURL     = "/epg/rest/getOrderStatusExtended.do"
 	HalkBankOrderStatusURL    = "/payment/rest/getOrderStatusExtended.do"
 	HalkBankOtpUrl            = "acs.gov.tm/acs/pages/enrollment/authentication.jsf"
+	SenagatRefundURL          = "/epg/rest/refund.do"
+	HalkBankRefundURL         = "/payment/rest/refund.do"
 )
