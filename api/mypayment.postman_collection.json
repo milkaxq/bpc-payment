@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"api_client\": \"halkbank\",\n    \"userName\": \"********\",\n    \"password\": \"********\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
+					"raw": "{\n    \"api_client\": \"senagat\",\n    \"userName\": \"********\",\n    \"password\": \"********\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,13 +42,13 @@
 			},
 			"response": [
 				{
-					"name": "Senagat Dowran Register Order",
+					"name": "example",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"api_client\": \"senagat\",\n    \"userName\": \"*******\",\n    \"password\": \"*******\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
+							"raw": "{\n    \"api_client\": \"senagat\",\n    // MERCHANT USERNAME PASSWORD\n    \"userName\": \"********\",\n    \"password\": \"********\",\n    \"amount\": 1,\n    \"description\": \"Sample order description\",\n    \"sessionTimeoutSecs\": 600\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -88,7 +88,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 20 Apr 2024 13:58:21 GMT"
+							"value": "Fri, 10 May 2024 18:11:37 GMT"
 						},
 						{
 							"key": "Content-Length",
@@ -96,7 +96,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"orderId\": \"736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff\",\n    \"formUrl\": \"https://epg.senagatbank.com.tm/payments/merchants/demir_yollary/payment.html?mdOrder=736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff&language=ru\"\n}"
+					"body": "{\n    \"orderId\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    \"formUrl\": \"https://epg.senagatbank.com.tm/payments/merchants/demir_yollary/payment.html?mdOrder=214bd6ed-4116-43c3-9002-94233e8f0bb3&language=ru\"\n}"
 				}
 			]
 		},
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"MDORDER\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\",\n  \"$EXPIRY\": \"203209\",\n  \"$PAN\": \"9934***********70\",\n  \"TEXT\": \"Test\",\n  \"$CVC\": \"***\",\n  \"language\": \"ru\"\n}",
+					"raw": "{\n    // ORDER ID FROM REGISTER ORDER\n    \"MDORDER\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    //   YYYYMM format\n    \"$EXPIRY\": \"******\",\n    \"$PAN\": \"***************\",\n    \"TEXT\": \"Test\",\n    \"$CVC\": \"***\",\n    \"language\": \"ru\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,13 +124,13 @@
 			},
 			"response": [
 				{
-					"name": "Senagat Dowran Submit Card",
+					"name": "example",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"MDORDER\": \"d6357390-c65d-4907-a822-5103bae37166\",\n  \"$EXPIRY\": \"202901\",\n  \"$PAN\": \"9934*********21\",\n  \"TEXT\": \"TEST\",\n  \"$CVC\": \"***\",\n  \"language\": \"ru\"\n}",
+							"raw": "{\n    // ORDER ID FROM REGISTER ORDER\n    \"MDORDER\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    //   YYYYMM format\n    \"$EXPIRY\": \"******\",\n    \"$PAN\": \"***************\",\n    \"TEXT\": \"Test\",\n    \"$CVC\": \"***\",\n    \"language\": \"ru\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -170,7 +170,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 20 Apr 2024 13:59:53 GMT"
+							"value": "Fri, 10 May 2024 18:12:01 GMT"
 						},
 						{
 							"key": "Content-Length",
@@ -189,7 +189,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"MDORDER\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\",\n    \"passwordEdit\": \"51520\"\n}",
+					"raw": "{\n    // ORDER ID FROM REGISTER ORDER\n    \"MDORDER\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    // OTP\n    \"passwordEdit\": \"90049\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -206,13 +206,13 @@
 			},
 			"response": [
 				{
-					"name": "Dowran Senagat Submit OTP",
+					"name": "example",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"MDORDER\": \"d6357390-c65d-4907-a822-5103bae37166\",\n    \"passwordEdit\": \"77256\"\n}",
+							"raw": "{\n    // ORDER ID FROM REGISTER ORDER\n    \"MDORDER\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    // OTP\n    \"passwordEdit\": \"90049\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -252,7 +252,7 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 20 Apr 2024 14:00:14 GMT"
+							"value": "Fri, 10 May 2024 18:12:36 GMT"
 						},
 						{
 							"key": "Content-Length",
@@ -271,7 +271,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"orderId\": \"59ab980d-7910-462e-83fe-97bfa7fa9229\"\n}",
+					"raw": "{\n    \"orderId\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    // MERCHANT USERNAME PASSWORD\n    \"userName\": \"*********\",\n    \"password\": \"*********\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -288,13 +288,13 @@
 			},
 			"response": [
 				{
-					"name": "Dorwan Senagat Check Status",
+					"name": "example",
 					"originalRequest": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"orderId\": \"736a56df-6e4c-4ce9-8bd5-3c6aa8c120ff\"\n}",
+							"raw": "{\n    \"orderId\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    // MERCHANT USERNAME PASSWORD\n    \"userName\": \"*********\",\n    \"password\": \"*********\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -334,15 +334,15 @@
 						},
 						{
 							"key": "Date",
-							"value": "Sat, 20 Apr 2024 14:00:21 GMT"
+							"value": "Fri, 10 May 2024 18:18:10 GMT"
 						},
 						{
 							"key": "Content-Length",
-							"value": "594"
+							"value": "565"
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"errorCode\": \"0\",\n    \"errorMessage\": \"Success\",\n    \"orderNumber\": \"******************\",\n    \"orderStatus\": 2,\n    \"actionCode\": 0,\n    \"actionCodeDescription\": \"Request processed successfully\",\n    \"amount\": 1,\n    \"currency\": \"934\",\n    \"date\": 1713621495293,\n    \"orderDescription\": \"Sample order description\",\n    \"ip\": \"217.174.228.25\",\n    \"merchantOrderParams\": [\n        {\n            \"name\": \"transmissionDate\",\n            \"value\": \"1713621607725\"\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": \"mdOrder\",\n            \"value\": \"*************************\"\n        }\n    ],\n    \"cardAuthInfo\": {\n        \"expiration\": \"202901\",\n        \"cardholderName\": \"****** ******\",\n        \"authorizationResponseId\": \"869184\",\n        \"pan\": \"9934*******21\"\n    },\n    \"fraudLevel\": 0\n}"
+					"body": "{\n    \"errorCode\": \"0\",\n    \"errorMessage\": \"Success\",\n    \"orderNumber\": \"jQTvZytHRS\",\n    \"orderStatus\": 4,\n    \"actionCode\": 0,\n    \"actionCodeDescription\": \"Request processed successfully\",\n    \"amount\": 1,\n    \"currency\": \"934\",\n    \"date\": 1715364697355,\n    \"orderDescription\": \"Sample order description\",\n    \"ip\": \"217.174.228.25\",\n    \"merchantOrderParams\": [\n        {\n            \"name\": \"transmissionDate\",\n            \"value\": \"1715364756752\"\n        }\n    ],\n    \"attributes\": [\n        {\n            \"name\": \"mdOrder\",\n            \"value\": \"214bd6ed-4116-43c3-9002-94233e8f0bb3\"\n        }\n    ],\n    \"cardAuthInfo\": {\n        \"expiration\": \"202709\",\n        \"cardholderName\": \"Test\",\n        \"authorizationResponseId\": \"977401\",\n        \"pan\": \"993470**5901\"\n    },\n    \"fraudLevel\": 0\n}"
 				}
 			]
 		},
@@ -368,65 +368,52 @@
 				},
 				"description": "This endpoint is used to resend a password for a specific order. The HTTP POST request should be made to {{base_url}}resend-password with a payload containing the order_id.\n\n### Request Body\n\n- order_id (string, required): The ID of the order for which the password needs to be resent.\n    \n\n### Response\n\n- message (string): A message indicating the status of the password resend operation.\n    \n\n#### Example\n\nRequest:\n\n``` json\n{\n  \"order_id\": \"example_order_id\"\n}\n\n ```\n\nResponse:\n\n``` json\n{\n  \"message\": \"Password resend successful\"\n}\n\n ```"
 			},
-			"response": [
-				{
-					"name": "Dowran Senagat Resend Password",
-					"originalRequest": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"order_id\":\"d6357390-c65d-4907-a822-5103bae37166\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}resend-password",
-							"host": [
-								"{{base_url}}resend-password"
-							]
+			"response": []
+		},
+		{
+			"name": "Refund",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderId\":\"214bd6ed-4116-43c3-9002-94233e8f0bb3\",\n    \"amount\":\"1\",\n    // MERCHANT USERNAME PASSWORD\n    \"userName\": \"*********\",\n    \"password\": \"********\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "Access-Control-Allow-Credentials",
-							"value": "true"
-						},
-						{
-							"key": "Access-Control-Allow-Headers",
-							"value": "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With"
-						},
-						{
-							"key": "Access-Control-Allow-Methods",
-							"value": "POST, OPTIONS, GET, PUT"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Sun, 21 Apr 2024 13:33:28 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "38"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"Succesfully Resended OTP\"\n}"
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}refund",
+					"host": [
+						"{{base_url}}refund"
+					]
 				}
-			]
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
