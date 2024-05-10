@@ -57,8 +57,6 @@ func makeOrderRegistration(apiclient, urlParams string) (OrderRegistrationRespon
 func createNewOrder(orderRegistrationRequest OrderRegistrationRequest, resp OrderRegistrationResponse) error {
 	var bankModel config.BankModel = config.BankModel{
 		ApiClient: orderRegistrationRequest.ApiClient,
-		Username:  orderRegistrationRequest.Username,
-		Password:  orderRegistrationRequest.Password,
 		OrderID:   resp.OrderId,
 	}
 	data, err := json.Marshal(bankModel)

@@ -26,7 +26,10 @@ func OrderRegistration(c *gin.Context) {
 		return
 	}
 
-	orderRegistrationRequest.OrderNumber = utils.GenerateOrderNumber(1, 32)
+	if orderRegistrationRequest.OrderNumber == "" {
+		orderRegistrationRequest.OrderNumber = utils.GenerateOrderNumber(1, 32)
+	}
+
 	orderRegistrationRequest.Currency = "934"
 	orderRegistrationRequest.ReturnURL = "/"
 
