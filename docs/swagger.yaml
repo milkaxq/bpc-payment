@@ -37,6 +37,8 @@ definitions:
         type: string
     required:
     - orderId
+    - password
+    - userName
     type: object
   checkstatus.OrderStatusResponse:
     properties:
@@ -181,8 +183,17 @@ definitions:
     properties:
       amount:
         type: string
-      order_id:
+      orderId:
         type: string
+      password:
+        type: string
+      userName:
+        type: string
+    required:
+    - amount
+    - orderId
+    - password
+    - userName
     type: object
   resendpassword.ResendPasswordRequest:
     properties:
@@ -213,12 +224,10 @@ definitions:
         description: language is language
         type: string
     required:
-    - $CVC
     - $EXPIRY
     - $PAN
     - MDORDER
     - TEXT
-    - language
     type: object
 info:
   contact: {}

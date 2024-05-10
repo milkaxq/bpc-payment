@@ -10,9 +10,9 @@ type SubmitCardRequest struct {
 	// Text is card holder name and surname
 	TEXT string `json:"TEXT" binding:"required"`
 	// CVC is secure code on back side of your card
-	CVC string `json:"$CVC" binding:"required"`
+	CVC string `json:"$CVC"`
 	// language is language
-	Language string `json:"language" binding:"required"`
+	Language string `json:"language"`
 }
 
 type SubmitCardResponse struct {

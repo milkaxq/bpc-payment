@@ -1,15 +1,10 @@
 package refund
 
 type RefundRequestBody struct {
-	OrderID string `json:"order_id"`
-	Amount  string `json:"amount"`
-}
-
-type RefundRequestBodyOfBank struct {
-	Username string `json:"userName"`
-	Password string `json:"password"`
-	OrderID  string `json:"orderId"`
-	Amount   string `json:"amount"`
+	Username string `json:"userName" binding:"required"`
+	Password string `json:"password" binding:"required"`
+	OrderID  string `json:"orderId" binding:"required"`
+	Amount   string `json:"amount" binding:"required"`
 }
 
 type RefundBankResponse struct {

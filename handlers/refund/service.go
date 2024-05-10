@@ -14,13 +14,8 @@ import (
 
 func makeRefundRequest(refundsRequest RefundRequestBody, bankModel config.BankModel) (string, error) {
 	var fullURL string
-	var refundsToBank RefundRequestBodyOfBank = RefundRequestBodyOfBank{
-		Username: bankModel.Username,
-		Password: bankModel.Password,
-		OrderID:  refundsRequest.OrderID,
-		Amount:   refundsRequest.Amount,
-	}
-	urlParams := utils.StructToURLParams(refundsToBank)
+
+	urlParams := utils.StructToURLParams(refundsRequest)
 
 	if bankModel.ApiClient == "senagat" {
 		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.SenagatRefundURL) + urlParams

@@ -305,7 +305,9 @@ const docTemplate = `{
         "checkstatus.OrderStatusRequest": {
             "type": "object",
             "required": [
-                "orderId"
+                "orderId",
+                "password",
+                "userName"
             ],
             "properties": {
                 "orderId": {
@@ -496,11 +498,23 @@ const docTemplate = `{
         },
         "refund.RefundRequestBody": {
             "type": "object",
+            "required": [
+                "amount",
+                "orderId",
+                "password",
+                "userName"
+            ],
             "properties": {
                 "amount": {
                     "type": "string"
                 },
-                "order_id": {
+                "orderId": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "userName": {
                     "type": "string"
                 }
             }
@@ -520,12 +534,10 @@ const docTemplate = `{
         "submitcard.SubmitCardRequest": {
             "type": "object",
             "required": [
-                "$CVC",
                 "$EXPIRY",
                 "$PAN",
                 "MDORDER",
-                "TEXT",
-                "language"
+                "TEXT"
             ],
             "properties": {
                 "$CVC": {

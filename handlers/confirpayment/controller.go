@@ -39,11 +39,13 @@ func ConfirmPayment(c *gin.Context) {
 		return
 	}
 
+	// TODO: parse to get this message
+	//<span id="codeError" class="error__message">Sorry, an unknown error has occurred. Please, call your bank.</span>
+
 	resp, err := finishPayment(paRes, confirPaymentRequest.MDORDER, bankModel.ApiClient)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-
 	c.JSON(http.StatusOK, gin.H{"message": resp})
 }
