@@ -2,7 +2,6 @@ package refund
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -33,14 +32,11 @@ func makeRefundRequest(refundsRequest RefundRequestBody, bankModel config.BankMo
 	if err != nil {
 		return "", err
 	}
+
 	var bankResponse RefundBankResponse
 	err = json.Unmarshal(bodyBytes, &bankResponse)
 	if err != nil {
 		return "", err
-	}
-
-	if bankResponse.ErrorCode != "0" {
-		return "", errors.New(bankResponse.ErrorMessage)
 	}
 
 	return "Successfully refunded", err
