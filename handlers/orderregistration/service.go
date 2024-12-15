@@ -18,6 +18,8 @@ func makeOrderRegistration(apiclient, urlParams string) (OrderRegistrationRespon
 		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.SenagatBaseURL, constants.SenagatRegisterURL) + urlParams
 	} else if apiclient == "halkbank" {
 		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.HalkBaseURL, constants.HalkBankRegisterURL) + urlParams
+	} else if apiclient == "rysgal" {
+		fullURL = fmt.Sprintf("https://%s%s?", constants.Base.RysgalBaseURL, constants.RysgalRegisterURL) + urlParams
 	}
 
 	req, err := http.NewRequest("POST", fullURL, nil)

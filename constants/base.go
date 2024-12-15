@@ -13,6 +13,7 @@ type BaseStruct struct {
 	// bank url < epg_server_IP_address>
 	SenagatBaseURL string
 	HalkBaseURL    string
+	RysgalBaseURL  string
 }
 
 var Base BaseStruct
@@ -27,5 +28,10 @@ func InitBase() {
 		log.Panic("please specify base_url in .env file")
 	} else {
 		Base.HalkBaseURL = halkbankBaseUrl
+	}
+	if rysgalBaseUrl, ok := os.LookupEnv("RYSGAL_BASE_URL"); !ok {
+		log.Panic("please specify base_url in .env file")
+	} else {
+		Base.RysgalBaseURL = rysgalBaseUrl
 	}
 }

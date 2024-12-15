@@ -1,16 +1,20 @@
 package constants
 
 const (
-	SenagatRegisterURL        = "/epg/rest/register.do"
+	SenagatRegisterURL       = "/epg/rest/register.do"
+	SenagatConfirmPaymentURL = "/epg/rest/processform.do"
+	SenagatFinishURL         = "/payments/rest/finish3ds.do"
+	SenagatOTPURL            = "/acs/api/3ds/form/otp"
+	SenagatOrderStatusURL    = "/epg/rest/getOrderStatusExtended.do"
+	SenagatRefundURL         = "/epg/rest/refund.do"
+
 	HalkBankRegisterURL       = "/payment/rest/register.do"
-	SenagatConfirmPaymentURL  = "/epg/rest/processform.do"
 	HalkBankConfirmPaymentURL = "/payment/rest/processform.do"
-	SenagatOTPURL             = "/acs/api/3ds/form/otp"
-	SenagatFinishURL          = "/payments/rest/finish3ds.do"
 	HalkBankFinishURL         = "/payment/rest/finish3ds.do"
-	SenagatOrderStatusURL     = "/epg/rest/getOrderStatusExtended.do"
 	HalkBankOrderStatusURL    = "/payment/rest/getOrderStatusExtended.do"
 	HalkBankOtpUrl            = "acs.gov.tm/acs/pages/enrollment/authentication.jsf"
-	SenagatRefundURL          = "/epg/rest/refund.do"
 	HalkBankRefundURL         = "/payment/rest/refund.do"
+
+	RysgalRegisterURL       = "/epg/rest/register.do"
+	RysgalConfirmPaymentURL = "/epg/rest/processform.do"
 )
